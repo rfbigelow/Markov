@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D79E02A219294C6003B3895 /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E029219294C6003B3895 /* environment.swift */; };
+		7D79E02C21929509003B3895 /* markovDecisionProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02B21929509003B3895 /* markovDecisionProcess.swift */; };
+		7D79E02E21929553003B3895 /* distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02D21929553003B3895 /* distribution.swift */; };
+		7D79E030219295BC003B3895 /* discreteDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02F219295BC003B3895 /* discreteDistribution.swift */; };
+		7D79E03221929601003B3895 /* tableDrivenMDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E03121929601003B3895 /* tableDrivenMDP.swift */; };
 		7DB284A9218FD2B8006B0A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB284A8218FD2B8006B0A83 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +28,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7D79E029219294C6003B3895 /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
+		7D79E02B21929509003B3895 /* markovDecisionProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = markovDecisionProcess.swift; sourceTree = "<group>"; };
+		7D79E02D21929553003B3895 /* distribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = distribution.swift; sourceTree = "<group>"; };
+		7D79E02F219295BC003B3895 /* discreteDistribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = discreteDistribution.swift; sourceTree = "<group>"; };
+		7D79E03121929601003B3895 /* tableDrivenMDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableDrivenMDP.swift; sourceTree = "<group>"; };
 		7DB284A5218FD2B8006B0A83 /* Markov */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Markov; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DB284A8218FD2B8006B0A83 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +68,11 @@
 			isa = PBXGroup;
 			children = (
 				7DB284A8218FD2B8006B0A83 /* main.swift */,
+				7D79E02D21929553003B3895 /* distribution.swift */,
+				7D79E029219294C6003B3895 /* environment.swift */,
+				7D79E02B21929509003B3895 /* markovDecisionProcess.swift */,
+				7D79E02F219295BC003B3895 /* discreteDistribution.swift */,
+				7D79E03121929601003B3895 /* tableDrivenMDP.swift */,
 			);
 			path = Markov;
 			sourceTree = "<group>";
@@ -119,7 +134,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D79E03221929601003B3895 /* tableDrivenMDP.swift in Sources */,
+				7D79E02C21929509003B3895 /* markovDecisionProcess.swift in Sources */,
+				7D79E02E21929553003B3895 /* distribution.swift in Sources */,
 				7DB284A9218FD2B8006B0A83 /* main.swift in Sources */,
+				7D79E02A219294C6003B3895 /* environment.swift in Sources */,
+				7D79E030219295BC003B3895 /* discreteDistribution.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
