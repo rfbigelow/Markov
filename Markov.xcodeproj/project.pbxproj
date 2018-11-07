@@ -7,11 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D79E02A219294C6003B3895 /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E029219294C6003B3895 /* environment.swift */; };
-		7D79E02C21929509003B3895 /* markovDecisionProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02B21929509003B3895 /* markovDecisionProcess.swift */; };
-		7D79E02E21929553003B3895 /* distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02D21929553003B3895 /* distribution.swift */; };
-		7D79E030219295BC003B3895 /* discreteDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02F219295BC003B3895 /* discreteDistribution.swift */; };
-		7D79E03221929601003B3895 /* tableDrivenMDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E03121929601003B3895 /* tableDrivenMDP.swift */; };
+		7D6A557B21932F8B00C6BE35 /* markovDecisionProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02B21929509003B3895 /* markovDecisionProcess.swift */; };
+		7D6A557C21932F8B00C6BE35 /* discreteDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02F219295BC003B3895 /* discreteDistribution.swift */; };
+		7D6A557D21932F8B00C6BE35 /* tableDrivenMDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E03121929601003B3895 /* tableDrivenMDP.swift */; };
+		7D6A557E21932F8B00C6BE35 /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E029219294C6003B3895 /* environment.swift */; };
+		7D6A557F21932F8B00C6BE35 /* distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02D21929553003B3895 /* distribution.swift */; };
+		7D6A55802193309F00C6BE35 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB284A8218FD2B8006B0A83 /* main.swift */; };
+		7D6A55812193309F00C6BE35 /* distribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02D21929553003B3895 /* distribution.swift */; };
+		7D6A55822193309F00C6BE35 /* environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E029219294C6003B3895 /* environment.swift */; };
+		7D6A55832193309F00C6BE35 /* markovDecisionProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02B21929509003B3895 /* markovDecisionProcess.swift */; };
+		7D6A55842193309F00C6BE35 /* discreteDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02F219295BC003B3895 /* discreteDistribution.swift */; };
+		7D6A55852193309F00C6BE35 /* tableDrivenMDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E03121929601003B3895 /* tableDrivenMDP.swift */; };
+		7D6A5586219330DA00C6BE35 /* MarkovTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55702192D31E00C6BE35 /* MarkovTests.swift */; };
 		7DB284A9218FD2B8006B0A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB284A8218FD2B8006B0A83 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +35,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7D6A556E2192D31E00C6BE35 /* MarkovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarkovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D6A55702192D31E00C6BE35 /* MarkovTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkovTests.swift; sourceTree = "<group>"; };
+		7D6A55722192D31E00C6BE35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D6A558721934BE000C6BE35 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7D79E029219294C6003B3895 /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
 		7D79E02B21929509003B3895 /* markovDecisionProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = markovDecisionProcess.swift; sourceTree = "<group>"; };
 		7D79E02D21929553003B3895 /* distribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = distribution.swift; sourceTree = "<group>"; };
@@ -38,6 +49,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7D6A556B2192D31E00C6BE35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7DB284A2218FD2B8006B0A83 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -48,10 +66,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D6A556F2192D31E00C6BE35 /* MarkovTests */ = {
+			isa = PBXGroup;
+			children = (
+				7D6A55702192D31E00C6BE35 /* MarkovTests.swift */,
+				7D6A55722192D31E00C6BE35 /* Info.plist */,
+			);
+			path = MarkovTests;
+			sourceTree = "<group>";
+		};
 		7DB2849C218FD2B8006B0A83 = {
 			isa = PBXGroup;
 			children = (
 				7DB284A7218FD2B8006B0A83 /* Markov */,
+				7D6A556F2192D31E00C6BE35 /* MarkovTests */,
 				7DB284A6218FD2B8006B0A83 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				7DB284A5218FD2B8006B0A83 /* Markov */,
+				7D6A556E2192D31E00C6BE35 /* MarkovTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +102,7 @@
 				7D79E02B21929509003B3895 /* markovDecisionProcess.swift */,
 				7D79E02F219295BC003B3895 /* discreteDistribution.swift */,
 				7D79E03121929601003B3895 /* tableDrivenMDP.swift */,
+				7D6A558721934BE000C6BE35 /* README.md */,
 			);
 			path = Markov;
 			sourceTree = "<group>";
@@ -80,6 +110,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7D6A556D2192D31E00C6BE35 /* MarkovTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D6A55732192D31E00C6BE35 /* Build configuration list for PBXNativeTarget "MarkovTests" */;
+			buildPhases = (
+				7D6A556A2192D31E00C6BE35 /* Sources */,
+				7D6A556B2192D31E00C6BE35 /* Frameworks */,
+				7D6A556C2192D31E00C6BE35 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MarkovTests;
+			productName = MarkovTests;
+			productReference = 7D6A556E2192D31E00C6BE35 /* MarkovTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7DB284A4218FD2B8006B0A83 /* Markov */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DB284AC218FD2B8006B0A83 /* Build configuration list for PBXNativeTarget "Markov" */;
@@ -107,6 +154,9 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Robert Bigelow";
 				TargetAttributes = {
+					7D6A556D2192D31E00C6BE35 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					7DB284A4218FD2B8006B0A83 = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -125,27 +175,86 @@
 			projectRoot = "";
 			targets = (
 				7DB284A4218FD2B8006B0A83 /* Markov */,
+				7D6A556D2192D31E00C6BE35 /* MarkovTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		7D6A556C2192D31E00C6BE35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		7D6A556A2192D31E00C6BE35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D6A5586219330DA00C6BE35 /* MarkovTests.swift in Sources */,
+				7D6A55802193309F00C6BE35 /* main.swift in Sources */,
+				7D6A55812193309F00C6BE35 /* distribution.swift in Sources */,
+				7D6A55822193309F00C6BE35 /* environment.swift in Sources */,
+				7D6A55832193309F00C6BE35 /* markovDecisionProcess.swift in Sources */,
+				7D6A55842193309F00C6BE35 /* discreteDistribution.swift in Sources */,
+				7D6A55852193309F00C6BE35 /* tableDrivenMDP.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7DB284A1218FD2B8006B0A83 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D79E03221929601003B3895 /* tableDrivenMDP.swift in Sources */,
-				7D79E02C21929509003B3895 /* markovDecisionProcess.swift in Sources */,
-				7D79E02E21929553003B3895 /* distribution.swift in Sources */,
+				7D6A557D21932F8B00C6BE35 /* tableDrivenMDP.swift in Sources */,
+				7D6A557C21932F8B00C6BE35 /* discreteDistribution.swift in Sources */,
 				7DB284A9218FD2B8006B0A83 /* main.swift in Sources */,
-				7D79E02A219294C6003B3895 /* environment.swift in Sources */,
-				7D79E030219295BC003B3895 /* discreteDistribution.swift in Sources */,
+				7D6A557F21932F8B00C6BE35 /* distribution.swift in Sources */,
+				7D6A557B21932F8B00C6BE35 /* markovDecisionProcess.swift in Sources */,
+				7D6A557E21932F8B00C6BE35 /* environment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		7D6A55742192D31E00C6BE35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MarkovTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = rfbigelow.MarkovTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		7D6A55752192D31E00C6BE35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MarkovTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = rfbigelow.MarkovTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 		7DB284AA218FD2B8006B0A83 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -282,6 +391,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7D6A55732192D31E00C6BE35 /* Build configuration list for PBXNativeTarget "MarkovTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D6A55742192D31E00C6BE35 /* Debug */,
+				7D6A55752192D31E00C6BE35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7DB284A0218FD2B8006B0A83 /* Build configuration list for PBXProject "Markov" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
