@@ -17,6 +17,10 @@ struct MdpEnvironment<T: MarkovDecisionProcess>: Environment {
     
     private(set) var currentState: State
     
+    var availableActions: Set<T.Action>? {
+        return mdp.getActions(forState: currentState)
+    }
+    
     init(mdp: T, initialState: State) {
         self.mdp = mdp
         currentState = initialState

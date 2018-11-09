@@ -20,6 +20,7 @@
 		7D6A55852193309F00C6BE35 /* tableDrivenMDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E03121929601003B3895 /* tableDrivenMDP.swift */; };
 		7D6A5586219330DA00C6BE35 /* MarkovTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55702192D31E00C6BE35 /* MarkovTests.swift */; };
 		7D6A55892195F57A00C6BE35 /* mdpEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55882195F57A00C6BE35 /* mdpEnvironment.swift */; };
+		7D6A558A219602BA00C6BE35 /* mdpEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55882195F57A00C6BE35 /* mdpEnvironment.swift */; };
 		7DB284A9218FD2B8006B0A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB284A8218FD2B8006B0A83 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -203,6 +204,7 @@
 				7D6A55812193309F00C6BE35 /* distribution.swift in Sources */,
 				7D6A55822193309F00C6BE35 /* environment.swift in Sources */,
 				7D6A55832193309F00C6BE35 /* markovDecisionProcess.swift in Sources */,
+				7D6A558A219602BA00C6BE35 /* mdpEnvironment.swift in Sources */,
 				7D6A55842193309F00C6BE35 /* discreteDistribution.swift in Sources */,
 				7D6A55852193309F00C6BE35 /* tableDrivenMDP.swift in Sources */,
 			);
