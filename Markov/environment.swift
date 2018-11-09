@@ -13,8 +13,10 @@ protocol Environment {
     associatedtype Action: Hashable
     associatedtype State
     
+    /// Gets the current state of the environment.
     var currentState: State { get }
     
+    /// Gets the actions that are available to select from the current state.
     var availableActions: Set<Action>? { get }
     
     /// Selects the given action and performs it, causing the environment to produce a reward and a new state.
