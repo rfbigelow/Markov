@@ -13,5 +13,8 @@ protocol Environment {
     associatedtype Action: Hashable
     associatedtype State
     
-    func select(action: Action) -> (Reward, State)
+    var currentState: State { get }
+    
+    /// Selects the given action and performs it, causing the environment to produce a reward and a new state.
+    mutating func select(action: Action) -> (Reward, State)
 }
