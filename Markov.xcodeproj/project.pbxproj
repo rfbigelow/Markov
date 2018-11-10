@@ -84,6 +84,7 @@
 		7DB2849C218FD2B8006B0A83 = {
 			isa = PBXGroup;
 			children = (
+				7D6A558721934BE000C6BE35 /* README.md */,
 				7DB284A7218FD2B8006B0A83 /* Markov */,
 				7D6A556F2192D31E00C6BE35 /* MarkovTests */,
 				7DB284A6218FD2B8006B0A83 /* Products */,
@@ -110,7 +111,6 @@
 				7D79E02F219295BC003B3895 /* discreteDistribution.swift */,
 				7D79E03121929601003B3895 /* tableDrivenMDP.swift */,
 				7DB284A8218FD2B8006B0A83 /* main.swift */,
-				7D6A558721934BE000C6BE35 /* README.md */,
 			);
 			path = Markov;
 			sourceTree = "<group>";
