@@ -29,6 +29,7 @@ struct DiscreteDistribution<T>: Distribution {
     
     let events: [T]
     let psum: [Double]
+    let weights: [Double]
     
     /// Initialize the distribution with a sequence of tuples that look like (event, probability).
     init(weightedEvents: [(T, Double)]) {
@@ -36,8 +37,12 @@ struct DiscreteDistribution<T>: Distribution {
         assert(totalWeight - 1.0 <= Double.leastNonzeroMagnitude, "Total weight must be 1.0, but was \(totalWeight).")
         
         events = weightedEvents.map({(e: T, _: Double) -> T in return e})
-        let weights = weightedEvents.map({_, x -> Double in return x})
+        weights = weightedEvents.map({_, x -> Double in return x})
         psum = partialSum(weights)
+    }
+    
+    func getExpectedValue(withTransform t: (T) -> Double) -> Double {
+        return zip(events, weights).map({t($0) * $1}).reduce(0, +)
     }
     
     /// Gets the next event from the distribution.

@@ -14,11 +14,11 @@ protocol MarkovDecisionProcess {
     associatedtype State: Hashable
     
     /// Gets the actions that are available from the given state.
-    func getActions(forState state: State) -> Set<Action>?
+    func getActions(forState s: State) -> Set<Action>?
     
-    /// Gets the reward value for the given state.
-    func getReward(forState state: State) -> Reward
+    /// Gets the reward value for taking action a from state s.
+    func getReward(fromState s: State, forTakingAction a: Action) -> Reward
     
-    /// Performs a transition from the given state to a new state by doing the specified action.
-    func transition(_ state: State, _ action: Action) -> State
+    /// Performs a transition from the state s to a new state by taking action a.
+    func transition(fromState s: State, byTakingAction a: Action) -> (State, Reward)
 }

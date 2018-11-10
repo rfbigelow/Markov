@@ -11,13 +11,13 @@ import Foundation
 /// A table-driven Markov Decision Process.
 struct TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
     
-    let transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<State>>>
+    let transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<(State, Reward)>>>
     let rewards: Dictionary<State, Reward>
     
     /// Initializes this MDP with the following tables:
     /// - parameter transitionTable: A table that maps each state to a dictionary that describes the transitions from that state.
     /// - parameter rewardTable: A table that maps each state to the reward that is collected when that state is reached.
-    init(transitionTable: Dictionary<State, Dictionary<Action, DiscreteDistribution<State>>>,
+    init(transitionTable: Dictionary<State, Dictionary<Action, DiscreteDistribution<(State, Reward)>>>,
          rewardTable: Dictionary<State, Reward>) {
         transitions = transitionTable
         rewards = rewardTable
@@ -32,16 +32,16 @@ struct TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess 
     }
     
     /// Gets the reward value for the given state.
-    func getReward(forState state: State) -> Reward {
-        guard let reward = rewards[state] else {
+    func getReward(fromState s: State, forTakingAction a: Action) -> Reward {
+        guard let reward = rewards[s] else {
             return Reward()
         }
         return reward
     }
     
     /// Performs a transition from the given state to a new state by doing the specified action.
-    func transition(_ state: State, _ action: Action) -> State {
-        if let moves = transitions[state], let fuzzyState = moves[action] {
+    func transition(fromState s: State, byTakingAction a: Action) -> (State, Reward) {
+        if let moves = transitions[s], let fuzzyState = moves[a] {
                 do {
                         return try fuzzyState.getNext()
                 } catch DiscreteDistributionError.badRandomValue(let randomValue, let partialSum) {
@@ -50,6 +50,6 @@ struct TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess 
                     print("Unexpected error.")
                 }
             }
-        return state
+        return (s, 0)
     }   
 }

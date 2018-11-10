@@ -12,6 +12,8 @@ import Foundation
 protocol Distribution {
     associatedtype T
     
+    func getExpectedValue(withTransform t: (T) -> Double) -> Double
+    
     /// Gets the next event in the distribution.
     func getNext() throws -> T
 }
