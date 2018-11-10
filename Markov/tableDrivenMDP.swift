@@ -11,20 +11,16 @@ import Foundation
 /// A table-driven Markov Decision Process.
 struct TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
     
-    let transitions: Dictionary<State, Dictionary<Action, State>>
-    let actions: Dictionary<Action, DiscreteDistribution<Action>>
+    let transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<State>>>
     let rewards: Dictionary<State, Reward>
     
     /// Initializes this MDP with the following tables:
     /// - parameter transitionTable: A table that maps each state to a dictionary that describes the transitions from that state.
     /// - parameter rewardTable: A table that maps each state to the reward that is collected when that state is reached.
-    /// - parameter actionTable: A table that maps each action to a distribution of actions. This adds a stochastic element to the MDP.
-    init(transitionTable: Dictionary<State, Dictionary<Action, State>>,
-         rewardTable: Dictionary<State, Reward>,
-         actionTable: Dictionary<Action, DiscreteDistribution<Action>>) {
+    init(transitionTable: Dictionary<State, Dictionary<Action, DiscreteDistribution<State>>>,
+         rewardTable: Dictionary<State, Reward>) {
         transitions = transitionTable
         rewards = rewardTable
-        actions = actionTable
     }
     
     /// Gets the actions that are available from the given state.
@@ -45,12 +41,9 @@ struct TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess 
     
     /// Performs a transition from the given state to a new state by doing the specified action.
     func transition(_ state: State, _ action: Action) -> State {
-        if let moves = transitions[state], let fuzzyAction = actions[action] {
+        if let moves = transitions[state], let fuzzyState = moves[action] {
                 do {
-                    let actualAction = try fuzzyAction.getNext()
-                    if let nextState = moves[actualAction] {
-                        return nextState
-                    }
+                        return try fuzzyState.getNext()
                 } catch DiscreteDistributionError.badRandomValue(let randomValue, let partialSum) {
                     print("Could not get next action due to bad random value \(randomValue) and partial sum \(partialSum).")
                 } catch {

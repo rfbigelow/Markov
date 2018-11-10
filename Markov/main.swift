@@ -14,12 +14,13 @@ enum Action: Int { case north, south, east, west }
 
 enum State { case start, meadowOfTranquility, pitOfDespair, end }
 
-let mdp = TableDrivenMDP<Action, State>(transitionTable: [State.start: [Action.north: State.meadowOfTranquility, Action.east: State.pitOfDespair],
-                                                           State.meadowOfTranquility: [Action.east: State.end, Action.south: State.start]],
-                                         rewardTable: [State.start: 0, State.meadowOfTranquility: 20, State.pitOfDespair: -1000, State.end: 100],
-                                         actionTable: [Action.north: DiscreteDistribution(weightedEvents: [(Action.north, 0.7), (Action.south, 0.1), (Action.east, 0.1), (Action.west, 0.1)]),
-                                                       Action.east: DiscreteDistribution(weightedEvents: [(Action.east, 0.5), (Action.north, 0.5)]),
-                                                       Action.south: DiscreteDistribution(weightedEvents: [(Action.south, 1.0)])])
+let mdp = TableDrivenMDP<Action, State>(transitionTable: [State.start: [Action.north: DiscreteDistribution(weightedEvents: [(State.meadowOfTranquility, 0.7),
+                                                                                                                            (State.pitOfDespair,0.1), (State.start, 0.2)])],
+                                                          State.meadowOfTranquility: [Action.east: DiscreteDistribution(weightedEvents: [(State.end, 0.5),
+                                                                                                                                         (State.meadowOfTranquility, 0.5)]),
+                                                                                      Action.south: DiscreteDistribution(weightedEvents: [(State.start, 0.5),
+                                                                                                                                          (State.meadowOfTranquility, 0.5)])]],
+                                         rewardTable: [State.start: 0, State.meadowOfTranquility: 20, State.pitOfDespair: -1000, State.end: 100])
 
 var currentState = State.start
 var score = 0.0
