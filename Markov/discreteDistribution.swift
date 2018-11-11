@@ -6,15 +6,9 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-/// Forms the partial sum of the given sequence.
-func partialSum(_ seq: [Double]) -> [Double] {
-    var psum: [Double] = []
-    var sum = 0.0
-    for x in seq {
-        sum += x
-        psum.append(sum)
-    }
-    return psum
+/// Forms the prefix sum of the given sequence.
+func prefixSum(_ seq: [Double]) -> [Double] {
+    return seq.reduce(into: []) { $0.append(($0.last ?? 0) + $1) }
 }
 
 /// Errors that can be thrown by a DiscreteDistribution<T>
@@ -36,7 +30,7 @@ class DiscreteDistribution<T>: Distribution {
         
         events = weightedEvents.map({(e: T, _: Double) -> T in return e})
         weights = weightedEvents.map({_, x -> Double in return x})
-        psum = partialSum(weights)
+        psum = prefixSum(weights)
     }
     
     func getExpectedValue(withTransform t: (T) -> Double) -> Double {
