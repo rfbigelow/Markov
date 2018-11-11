@@ -8,11 +8,14 @@
 
 import Foundation
 
-/// A policy gives the probability of taking an action from a state.
+/// A policy determines a course of action.
 protocol Policy {
     associatedtype State: Hashable
     associatedtype Action
     
     /// Gets the probability of taking action a from state s.
     func getProbability(fromState s: State, ofTaking a: Action) -> Double
+    
+    /// Gets an action to take from the state s according to this policy.
+    func getAction(forState s: State) -> Action
 }

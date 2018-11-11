@@ -45,7 +45,6 @@ struct DiscreteDistribution<T>: Distribution {
         return zip(events, weights).map({t($0) * $1}).reduce(0, +)
     }
     
-    /// Gets the next event from the distribution.
     func getNext() throws -> T {
         let rand = Double.random(in: 0...1)
         if let index = psum.firstIndex(where: {x -> Bool in rand <= x}) {
@@ -54,5 +53,23 @@ struct DiscreteDistribution<T>: Distribution {
         else {
             throw DiscreteDistributionError.badRandomValue(randomValue: rand, partialSum: psum)
         }
+    }
+    
+    func getProbability(forEventMatchedBy isMatch:(T) -> Bool) -> Double {
+        for (event, weight) in zip(events, weights) {
+            if isMatch(event) {
+                return weight
+            }
+        }
+        return 0.0
+    }
+    
+    func getEvent(matching isMatch:(T) -> Bool) -> T? {
+        for event in events {
+            if isMatch(event) {
+                return event
+            }
+        }
+        return nil
     }
 }

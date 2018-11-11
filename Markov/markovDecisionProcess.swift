@@ -19,6 +19,9 @@ protocol MarkovDecisionProcess {
     /// Gets the reward value for taking action a from state s.
     func getReward(fromState s: State, forTakingAction a: Action) -> Reward
     
+    /// Gets the reward value for taking action a and transitioning to state next.
+    func getReward(fromState s: State, forTakingAction a: Action, transitioningTo next: State) -> Reward
+    
     /// Performs a transition from the state s to a new state by taking action a.
     func transition(fromState s: State, byTakingAction a: Action) -> (State, Reward)
 }

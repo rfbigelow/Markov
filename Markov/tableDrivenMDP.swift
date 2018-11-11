@@ -10,17 +10,18 @@ import Foundation
 
 /// A table-driven Markov Decision Process.
 struct TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
-    
-    let transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<(State, Reward)>>>
-    let rewards: Dictionary<State, Reward>
+    struct Transition: Equatable {
+        let state: State
+        let reward: Reward
+    }
+
+    let transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition>>>
     
     /// Initializes this MDP with the following tables:
     /// - parameter transitionTable: A table that maps each state to a dictionary that describes the transitions from that state.
     /// - parameter rewardTable: A table that maps each state to the reward that is collected when that state is reached.
-    init(transitionTable: Dictionary<State, Dictionary<Action, DiscreteDistribution<(State, Reward)>>>,
-         rewardTable: Dictionary<State, Reward>) {
+    init(transitionTable: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition>>>) {
         transitions = transitionTable
-        rewards = rewardTable
     }
     
     /// Gets the actions that are available from the given state.
@@ -33,17 +34,25 @@ struct TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess 
     
     /// Gets the reward value for the given state.
     func getReward(fromState s: State, forTakingAction a: Action) -> Reward {
-        guard let reward = rewards[s] else {
+        guard let moves = transitions[s], let distribution = moves[a] else {
             return Reward()
         }
-        return reward
+        return distribution.getExpectedValue(withTransform: { return $0.reward })
+    }
+    
+    func getReward(fromState s: State, forTakingAction a: Action, transitioningTo next: State) -> Reward {
+        guard let moves = transitions[s], let distribution = moves[a], let transition = distribution.getEvent(matching: { $0.state == next }) else {
+            return Reward()
+        }
+        return transition.reward
     }
     
     /// Performs a transition from the given state to a new state by doing the specified action.
     func transition(fromState s: State, byTakingAction a: Action) -> (State, Reward) {
         if let moves = transitions[s], let fuzzyState = moves[a] {
                 do {
-                        return try fuzzyState.getNext()
+                        let transition = try fuzzyState.getNext()
+                        return (transition.state, transition.reward)
                 } catch DiscreteDistributionError.badRandomValue(let randomValue, let partialSum) {
                     print("Could not get next action due to bad random value \(randomValue) and partial sum \(partialSum).")
                 } catch {

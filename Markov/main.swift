@@ -14,13 +14,9 @@ enum Action: Int { case north, south, east, west }
 
 enum State { case start, meadowOfTranquility, pitOfDespair, end }
 
-let mdp = TableDrivenMDP<Action, State>(transitionTable: [State.start: [Action.north: DiscreteDistribution(weightedEvents: [((State.meadowOfTranquility, 20), 0.7),
-                                                                                                                            ((State.pitOfDespair, -1000),0.1), ((State.start, 0), 0.2)])],
-                                                          State.meadowOfTranquility: [Action.east: DiscreteDistribution(weightedEvents: [((State.end, 100), 0.5),
-                                                                                                                                         ((State.meadowOfTranquility, 20), 0.5)]),
-                                                                                      Action.south: DiscreteDistribution(weightedEvents: [((State.start, 0), 0.5),
-                                                                                                                                          ((State.meadowOfTranquility, 20), 0.5)])]],
-                                         rewardTable: [State.start: 0, State.meadowOfTranquility: 20, State.pitOfDespair: -1000, State.end: 100])
+let mdp = TableDrivenMDP<Action, State>(transitionTable:
+    [State.start: [Action.north: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: State.meadowOfTranquility, reward: 20), 0.7),                                                                                                           (TableDrivenMDP.Transition(state: State.pitOfDespair, reward: -1000),0.1), (TableDrivenMDP.Transition(state: State.start, reward: 0), 0.2)])],
+     State.meadowOfTranquility: [Action.east: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: State.end, reward: 100), 0.5),                                                                                                                                      (TableDrivenMDP.Transition(state: State.meadowOfTranquility, reward: 20), 0.5)]), Action.south: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: State.start, reward: 0), 0.5), (TableDrivenMDP.Transition(state: State.meadowOfTranquility, reward: 20), 0.5)])]])
 
 var currentState = State.start
 var score = 0.0
