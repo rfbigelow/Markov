@@ -6,8 +6,6 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-import Foundation
-
 typealias Reward = Double
 
 enum Action: Int { case north, south, east, west }

@@ -6,8 +6,6 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-import Foundation
-
 /// A type that provides an environment interface for reinforcement learning.
 protocol Environment {
     associatedtype Action: Hashable

@@ -6,8 +6,6 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-import Foundation
-
 /// An environment provided by a Markov decision process
 struct MdpEnvironment<T: MarkovDecisionProcess>: Environment {
     typealias Action = T.Action

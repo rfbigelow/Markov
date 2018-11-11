@@ -6,8 +6,6 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-import Foundation
-
 /// A policy determines a course of action.
 protocol Policy {
     associatedtype State: Hashable

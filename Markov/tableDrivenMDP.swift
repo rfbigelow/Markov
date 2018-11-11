@@ -6,16 +6,14 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-import Foundation
-
 /// A table-driven Markov Decision Process.
-struct TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
+class TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
     struct Transition: Equatable {
         let state: State
-        let reward: Reward
+        var reward: Reward
     }
 
-    let transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition>>>
+    var transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition>>>
     
     /// Initializes this MDP with the following tables:
     /// - parameter transitionTable: A table that maps each state to a dictionary that describes the transitions from that state.
@@ -60,5 +58,17 @@ struct TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess 
                 }
             }
         return (s, 0)
-    }   
+    }
+    
+    func updateAllRewards(forState s: State, withReward r: Reward) {
+        for moves in transitions.values {
+            for distribution in moves.values {
+                for i in 0..<distribution.events.count {
+                    if distribution.events[i].state == s {
+                        distribution.events[i].reward = r
+                    }
+                }
+            }
+        }
+    }
 }

@@ -6,8 +6,6 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-import Foundation
-
 /// Forms the partial sum of the given sequence.
 func partialSum(_ seq: [Double]) -> [Double] {
     var psum: [Double] = []
@@ -25,9 +23,9 @@ enum DiscreteDistributionError: Error {
 }
 
 /// A discrete distribution of events.
-struct DiscreteDistribution<T>: Distribution {
+class DiscreteDistribution<T>: Distribution {
     
-    let events: [T]
+    var events: [T]
     let psum: [Double]
     let weights: [Double]
     

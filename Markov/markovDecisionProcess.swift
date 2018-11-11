@@ -6,8 +6,6 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-import Foundation
-
 /// A type that models a Markov Decision Process (MDP).
 protocol MarkovDecisionProcess {
     associatedtype Action: Hashable

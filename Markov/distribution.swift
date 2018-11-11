@@ -6,8 +6,6 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-import Foundation
-
 /// A type representing a distribution of a random variable.
 protocol Distribution {
     associatedtype T
