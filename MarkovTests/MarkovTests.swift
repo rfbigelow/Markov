@@ -9,12 +9,12 @@
 import XCTest
 
 class MarkovTests: XCTestCase {
-    var mdp: TableDrivenMDP<Action, State>!
+    var mdp: TableDrivenMDP<TextWorldAction, TextWorldState>!
 
     override func setUp() {
-        mdp = TableDrivenMDP<Action, State>(transitionTable:
-            [State.start: [Action.north: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: State.meadowOfTranquility, reward: 20), 0.7),                                                                                                           (TableDrivenMDP.Transition(state: State.pitOfDespair, reward: -1000),0.1), (TableDrivenMDP.Transition(state: State.start, reward: 0), 0.2)])],
-             State.meadowOfTranquility: [Action.east: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: State.end, reward: 100), 0.5),                                                                                                                                      (TableDrivenMDP.Transition(state: State.meadowOfTranquility, reward: 20), 0.5)]), Action.south: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: State.start, reward: 0), 0.5), (TableDrivenMDP.Transition(state: State.meadowOfTranquility, reward: 20), 0.5)])]])
+        mdp = TableDrivenMDP<TextWorldAction, TextWorldState>(transitionTable:
+            [TextWorldState.start: [TextWorldAction.north: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.7),                                                                                                           (TableDrivenMDP.Transition(state: TextWorldState.pitOfDespair, reward: -1000),0.1), (TableDrivenMDP.Transition(state: TextWorldState.start, reward: 0), 0.2)])],
+             TextWorldState.meadowOfTranquility: [TextWorldAction.east: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: TextWorldState.end, reward: 100), 0.5),                                                                                                                                      (TableDrivenMDP.Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.5)]), TextWorldAction.south: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: TextWorldState.start, reward: 0), 0.5), (TableDrivenMDP.Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.5)])]])
     }
 
     override func tearDown() {
@@ -24,7 +24,7 @@ class MarkovTests: XCTestCase {
     func testOverallPerformance() {
         // This is an example of a performance test case.
         self.measure {
-            var currentState = State.start
+            var currentState = TextWorldState.start
             var score = 0.0
             while let availableAction = mdp.getActions(forState: currentState){
                 let action = availableAction.first!

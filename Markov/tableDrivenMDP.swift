@@ -12,8 +12,14 @@ class TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
         let state: State
         var reward: Reward
     }
+    
+    /// Gets the states for this MDP.
+    var states: Set<State> {
+        return Set(transitions.keys)
+    }
 
-    var transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition>>>
+    /// The tabular representation of the MDP.
+    internal var transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition>>>
     
     /// Initializes this MDP with the following tables:
     /// - parameter transitionTable: A table that maps each state to a dictionary that describes the transitions from that state.
@@ -38,6 +44,7 @@ class TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
         return distribution.getExpectedValue(withTransform: { return $0.reward })
     }
     
+    /// Gets the reward value for taking action a from state s to state next.
     func getReward(fromState s: State, forTakingAction a: Action, transitioningTo next: State) -> Reward {
         guard let moves = transitions[s], let distribution = moves[a], let transition = distribution.getEvent(matching: { $0.state == next }) else {
             return Reward()
@@ -60,6 +67,7 @@ class TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
         return (s, 0)
     }
     
+    /// Updates all rewards leading to state s with the given reward value.
     func updateAllRewards(forState s: State, withReward r: Reward) {
         for moves in transitions.values {
             for distribution in moves.values {

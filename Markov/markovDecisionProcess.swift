@@ -11,6 +11,9 @@ protocol MarkovDecisionProcess {
     associatedtype Action: Hashable
     associatedtype State: Hashable
     
+    /// Gets the states for this MDP.
+    var states: Set<State> { get }
+    
     /// Gets the actions that are available from the given state.
     func getActions(forState s: State) -> Set<Action>?
     

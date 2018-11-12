@@ -8,15 +8,15 @@
 
 typealias Reward = Double
 
-enum Action: Int { case north, south, east, west }
+enum TextWorldAction: Int { case north, south, east, west }
 
-enum State { case start, meadowOfTranquility, pitOfDespair, end }
+enum TextWorldState { case start, meadowOfTranquility, pitOfDespair, end }
 
-let mdp = TableDrivenMDP<Action, State>(transitionTable:
-    [State.start: [Action.north: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: State.meadowOfTranquility, reward: 20), 0.7),                                                                                                           (TableDrivenMDP.Transition(state: State.pitOfDespair, reward: -1000),0.1), (TableDrivenMDP.Transition(state: State.start, reward: 0), 0.2)])],
-     State.meadowOfTranquility: [Action.east: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: State.end, reward: 100), 0.5),                                                                                                                                      (TableDrivenMDP.Transition(state: State.meadowOfTranquility, reward: 20), 0.5)]), Action.south: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: State.start, reward: 0), 0.5), (TableDrivenMDP.Transition(state: State.meadowOfTranquility, reward: 20), 0.5)])]])
+let mdp = TableDrivenMDP<TextWorldAction, TextWorldState>(transitionTable:
+    [TextWorldState.start: [TextWorldAction.north: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.7),                                                                                                           (TableDrivenMDP.Transition(state: TextWorldState.pitOfDespair, reward: -1000),0.1), (TableDrivenMDP.Transition(state: TextWorldState.start, reward: 0), 0.2)])],
+     TextWorldState.meadowOfTranquility: [TextWorldAction.east: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: TextWorldState.end, reward: 100), 0.5),                                                                                                                                      (TableDrivenMDP.Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.5)]), TextWorldAction.south: DiscreteDistribution(weightedEvents: [(TableDrivenMDP.Transition(state: TextWorldState.start, reward: 0), 0.5), (TableDrivenMDP.Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.5)])]])
 
-var currentState = State.start
+var currentState = TextWorldState.start
 var score = 0.0
 print("You are here: \(currentState)")
 while let availableActions = mdp.getActions(forState: currentState){
@@ -32,7 +32,7 @@ print("Game Over.")
 
 print("Environment Test")
 
-var environment = MdpEnvironment<TableDrivenMDP<Action, State>>(mdp: mdp, initialState: State.start)
+var environment = MdpEnvironment<TableDrivenMDP<TextWorldAction, TextWorldState>>(mdp: mdp, initialState: TextWorldState.start)
 score = 0.0
 print("You are here: \(environment.currentState)")
 while let action = environment.availableActions?.randomElement() {

@@ -15,5 +15,5 @@ protocol Policy {
     func getProbability(fromState s: State, ofTaking a: Action) -> Double
     
     /// Gets an action to take from the state s according to this policy.
-    func getAction(forState s: State) -> Action
+    func getAction(forState s: State) -> Action?
 }

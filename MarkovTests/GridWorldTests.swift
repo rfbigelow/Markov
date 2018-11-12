@@ -63,6 +63,20 @@ class GridWorldTests: XCTestCase {
         gridWorld.addVortex(at: GridSquare(x: 2, y: 2), withReward: -100)
         playGridWorldRandomly(gridWorld: gridWorld, currentState: &currentState, score: &score, plays: 100)
     }
+    
+    func testPolicyEvaluator() {
+        gridWorld.addNexus(from: GridSquare(x: 1, y: 4), to: GridSquare(x: 1, y: 0), withReward: 10.0)
+        gridWorld.addNexus(from: GridSquare(x: 3, y: 4), to: GridSquare(x: 3, y: 2), withReward: 5.0)
+        
+        let policyEvaluator = PolicyEvaluator(mdp: gridWorld, epsilon: 0.01, gamma: 0.9)
+        let policy = RandomSelectPolicy(mdp: gridWorld)
+        self.measure {
+            policyEvaluator.evaluate(policy: policy)
+        }
+        for estimate in policyEvaluator.estimates.sorted(by: { $0.key.x < $1.key.x || (($0.key.x == $1.key.x) && ($0.key.y < $1.key.y))}) {
+            print(estimate)
+        }
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
