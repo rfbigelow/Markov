@@ -8,10 +8,6 @@
 
 /// A table-driven Markov Decision Process.
 class TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
-    struct Transition: Equatable {
-        let state: State
-        var reward: Reward
-    }
     
     /// Gets the states for this MDP.
     var states: Set<State> {
@@ -19,12 +15,12 @@ class TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
     }
 
     /// The tabular representation of the MDP.
-    internal var transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition>>>
+    internal var transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition<State>>>>
     
     /// Initializes this MDP with the following tables:
     /// - parameter transitionTable: A table that maps each state to a dictionary that describes the transitions from that state.
     /// - parameter rewardTable: A table that maps each state to the reward that is collected when that state is reached.
-    init(transitionTable: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition>>>) {
+    init(transitionTable: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition<State>>>>) {
         transitions = transitionTable
     }
     
@@ -50,6 +46,20 @@ class TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
             return Reward()
         }
         return transition.reward
+    }
+    
+    func getTransitions(fromState s: State, forTakingAction a: Action) -> [(Transition<State>, Double)]? {
+        guard let moves = transitions[s], let distribution = moves[a] else {
+            return nil
+        }
+        return Array(distribution)
+    }
+    
+    func getTransitions(fromState s: State, forTakingAction a: Action, transitioningTo next: State) -> [(Transition<State>, Double)]? {
+        guard let moves = transitions[s], let distribution = moves[a] else {
+            return nil
+        }
+        return Array(distribution.filter({ $0.0.state == next }))
     }
     
     /// Performs a transition from the given state to a new state by doing the specified action.

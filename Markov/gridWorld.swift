@@ -23,11 +23,11 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
     init(rows: Int, columns: Int) {
         rowCount = rows
         columnCount = columns
-        var grid = Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition>>>()
+        var grid = Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition<State>>>>()
         for i in 0..<columns {
             for j in 0..<rows {
                 let gs = GridSquare(x: i, y: j)
-                var moves = Dictionary<GridAction, DiscreteDistribution<Transition>>()
+                var moves = Dictionary<GridAction, DiscreteDistribution<Transition<State>>>()
                 moves[GridAction.up] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.up, rowCount: rows, columnCount: columns)
                 moves[GridAction.down] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.down, rowCount: rows, columnCount: columns)
                 moves[GridAction.left] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.left, rowCount: rows, columnCount: columns)
@@ -39,7 +39,7 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
     }
     
     func addNexus(from: GridSquare, to: GridSquare, withReward reward: Reward) {
-        var moves = Dictionary<GridAction, DiscreteDistribution<Transition>>()
+        var moves = Dictionary<GridAction, DiscreteDistribution<Transition<State>>>()
         let transition = Transition(state: to, reward: reward)
         moves[GridAction.up] = DiscreteDistribution(weightedEvents: [(transition, 1.0)])
         moves[GridAction.down] = DiscreteDistribution(weightedEvents: [(transition, 1.0)])
@@ -53,8 +53,8 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
         transitions[at] = nil
     }
     
-    private static func createMove(forGridSquare gs: GridSquare, andAction action: GridAction, rowCount: Int, columnCount: Int) -> DiscreteDistribution<Transition> {
-        var transition: Transition
+    private static func createMove(forGridSquare gs: GridSquare, andAction action: GridAction, rowCount: Int, columnCount: Int) -> DiscreteDistribution<Transition<State>> {
+        var transition: Transition<State>
         switch action {
         case GridAction.up:
             if gs.y == rowCount - 1 {

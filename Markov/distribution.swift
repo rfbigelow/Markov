@@ -7,7 +7,7 @@
 //
 
 /// A type representing a distribution of a random variable.
-protocol Distribution {
+protocol Distribution: Sequence {
     associatedtype T
     
     /// Gets the expected value by transforming each event into a Double representing the event's value.

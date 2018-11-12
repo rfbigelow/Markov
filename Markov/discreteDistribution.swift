@@ -18,6 +18,8 @@ enum DiscreteDistributionError: Error {
 
 /// A discrete distribution of events.
 class DiscreteDistribution<T>: Distribution {
+    typealias Element = (T, Double)
+    typealias Iterator = Zip2Sequence<Array<T>, Array<Double>>.Iterator
     
     var events: [T]
     let psum: [Double]
@@ -63,5 +65,9 @@ class DiscreteDistribution<T>: Distribution {
             }
         }
         return nil
+    }
+    
+    func makeIterator() -> DiscreteDistribution<T>.Iterator {
+        return zip(events, weights).makeIterator()
     }
 }

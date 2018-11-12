@@ -29,29 +29,16 @@ class PolicyEvaluator<T: MarkovDecisionProcess> {
         repeat {
             maxDelta = 0.0
             for state in states {
-                if let actions = mdp.getActions(forState: state) {
-                    let oldEstimate = estimates[state] ?? 0.0
-                    var sum = 0.0
-                    for action in actions {
-                        let actionProb = policy.getProbability(fromState: state, ofTaking: action)
-                        let actionReward = mdp.getReward(fromState: state, forTakingAction: action)
-                        let (nextState, _) = mdp.transition(fromState: state, byTakingAction: action)
-                        let nextStateValue = estimates[nextState] ?? 0.0
-                        sum += actionProb * (actionReward + gamma * nextStateValue)
-                    }
-                    estimates[state] = sum
-                    let delta = abs(oldEstimate - sum)
-                    if delta > maxDelta {
-                        maxDelta = delta
-                    }
+                let oldEstimate = estimates[state] ?? 0.0
+                let stateValue = getStateValue(forState: state, withModel: mdp, policy: policy, discount: gamma, v: { estimates[$0] ?? 0.0 })
+                estimates[state] = stateValue
+                let delta = abs(oldEstimate - stateValue)
+                if delta > maxDelta {
+                    maxDelta = delta
                 }
             }
             iterations += 1
         } while maxDelta > epsilon
         print("Converged in \(iterations) iterations.")
-    }
-    
-    func getValue(forState state: T.State) -> Reward {
-        return estimates[state] ?? 0.0
     }
 }

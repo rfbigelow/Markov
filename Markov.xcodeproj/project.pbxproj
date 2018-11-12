@@ -30,6 +30,8 @@
 		7D6A559A2198F8C000C6BE35 /* policyEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55982198F8C000C6BE35 /* policyEvaluator.swift */; };
 		7D6A559C21991EEB00C6BE35 /* randomSelectPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A559B21991EEB00C6BE35 /* randomSelectPolicy.swift */; };
 		7D6A559D21991EEB00C6BE35 /* randomSelectPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A559B21991EEB00C6BE35 /* randomSelectPolicy.swift */; };
+		7D6A559F2199DC1700C6BE35 /* valueFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A559E2199DC1700C6BE35 /* valueFunctions.swift */; };
+		7D6A55A02199DC1700C6BE35 /* valueFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A559E2199DC1700C6BE35 /* valueFunctions.swift */; };
 		7DB284A9218FD2B8006B0A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB284A8218FD2B8006B0A83 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +58,7 @@
 		7D6A55962198A87500C6BE35 /* GridWorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridWorldTests.swift; sourceTree = "<group>"; };
 		7D6A55982198F8C000C6BE35 /* policyEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = policyEvaluator.swift; sourceTree = "<group>"; };
 		7D6A559B21991EEB00C6BE35 /* randomSelectPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = randomSelectPolicy.swift; sourceTree = "<group>"; };
+		7D6A559E2199DC1700C6BE35 /* valueFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = valueFunctions.swift; sourceTree = "<group>"; };
 		7D79E029219294C6003B3895 /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
 		7D79E02B21929509003B3895 /* markovDecisionProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = markovDecisionProcess.swift; sourceTree = "<group>"; };
 		7D79E02D21929553003B3895 /* distribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = distribution.swift; sourceTree = "<group>"; };
@@ -126,6 +129,7 @@
 				7D6A55922197F0AB00C6BE35 /* gridWorld.swift */,
 				7D6A55982198F8C000C6BE35 /* policyEvaluator.swift */,
 				7D6A559B21991EEB00C6BE35 /* randomSelectPolicy.swift */,
+				7D6A559E2199DC1700C6BE35 /* valueFunctions.swift */,
 			);
 			path = Markov;
 			sourceTree = "<group>";
@@ -227,6 +231,7 @@
 				7D6A558A219602BA00C6BE35 /* mdpEnvironment.swift in Sources */,
 				7D6A55842193309F00C6BE35 /* discreteDistribution.swift in Sources */,
 				7D6A55852193309F00C6BE35 /* tableDrivenMDP.swift in Sources */,
+				7D6A55A02199DC1700C6BE35 /* valueFunctions.swift in Sources */,
 				7D6A559D21991EEB00C6BE35 /* randomSelectPolicy.swift in Sources */,
 				7D6A55942197F0AB00C6BE35 /* gridWorld.swift in Sources */,
 				7D6A55972198A87500C6BE35 /* GridWorldTests.swift in Sources */,
@@ -239,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D6A557D21932F8B00C6BE35 /* tableDrivenMDP.swift in Sources */,
+				7D6A559F2199DC1700C6BE35 /* valueFunctions.swift in Sources */,
 				7D6A559C21991EEB00C6BE35 /* randomSelectPolicy.swift in Sources */,
 				7D6A557C21932F8B00C6BE35 /* discreteDistribution.swift in Sources */,
 				7DB284A9218FD2B8006B0A83 /* main.swift in Sources */,
