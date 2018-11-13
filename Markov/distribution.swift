@@ -13,8 +13,8 @@ protocol Distribution: Sequence {
     /// Gets the expected value by transforming each event into a Double representing the event's value.
     func getExpectedValue(withTransform t: (T) -> Double) -> Double
     
-    /// Gets the next event in the distribution.
-    func getNext() throws -> T
+    /// Gets the next event in the distribution, if there are any.
+    func getNext() -> T?
     
     /// Gets the probability of the event e occurring.
     func getProbability(forEventMatchedBy isMatch:(T) -> Bool) -> Double

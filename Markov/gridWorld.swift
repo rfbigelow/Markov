@@ -23,11 +23,11 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
     init(rows: Int, columns: Int) {
         rowCount = rows
         columnCount = columns
-        var grid = Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition<State>>>>()
+        var grid = Dictionary<State, Dictionary<Action, WeightedDistribution<Transition<State>>>>()
         for i in 0..<columns {
             for j in 0..<rows {
                 let gs = GridSquare(x: i, y: j)
-                var moves = Dictionary<GridAction, DiscreteDistribution<Transition<State>>>()
+                var moves = Dictionary<GridAction, WeightedDistribution<Transition<State>>>()
                 moves[GridAction.up] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.up, rowCount: rows, columnCount: columns)
                 moves[GridAction.down] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.down, rowCount: rows, columnCount: columns)
                 moves[GridAction.left] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.left, rowCount: rows, columnCount: columns)
@@ -39,12 +39,12 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
     }
     
     func addNexus(from: GridSquare, to: GridSquare, withReward reward: Reward) {
-        var moves = Dictionary<GridAction, DiscreteDistribution<Transition<State>>>()
+        var moves = Dictionary<GridAction, WeightedDistribution<Transition<State>>>()
         let transition = Transition(state: to, reward: reward)
-        moves[GridAction.up] = DiscreteDistribution(weightedEvents: [(transition, 1.0)])
-        moves[GridAction.down] = DiscreteDistribution(weightedEvents: [(transition, 1.0)])
-        moves[GridAction.left] = DiscreteDistribution(weightedEvents: [(transition, 1.0)])
-        moves[GridAction.right] = DiscreteDistribution(weightedEvents: [(transition, 1.0)])
+        moves[GridAction.up] = WeightedDistribution(weightedEvents: [(transition, 1.0)])
+        moves[GridAction.down] = WeightedDistribution(weightedEvents: [(transition, 1.0)])
+        moves[GridAction.left] = WeightedDistribution(weightedEvents: [(transition, 1.0)])
+        moves[GridAction.right] = WeightedDistribution(weightedEvents: [(transition, 1.0)])
         transitions[from] = moves
     }
     
@@ -53,7 +53,7 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
         transitions[at] = nil
     }
     
-    private static func createMove(forGridSquare gs: GridSquare, andAction action: GridAction, rowCount: Int, columnCount: Int) -> DiscreteDistribution<Transition<State>> {
+    private static func createMove(forGridSquare gs: GridSquare, andAction action: GridAction, rowCount: Int, columnCount: Int) -> WeightedDistribution<Transition<State>> {
         var transition: Transition<State>
         switch action {
         case GridAction.up:
@@ -85,6 +85,6 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
                 transition = Transition(state: GridSquare(x: gs.x + 1, y: gs.y), reward: 0.0)
             }
         }
-        return DiscreteDistribution(weightedEvents: [(transition, 1.0)])
+        return WeightedDistribution(weightedEvents: [(transition, 1.0)])
     }
 }

@@ -36,7 +36,5 @@ struct RandomSelectPolicy<T: MarkovDecisionProcess>: Policy {
             return actions.randomElement()
         }
         return nil
-    }
-
-    
+    }  
 }

@@ -1,5 +1,5 @@
 //
-//  discreteDistribution.swift
+//  weightedDistribution.swift
 //  Markov
 //
 //  Created by Robert Bigelow on 11/6/18.
@@ -11,13 +11,13 @@ func prefixSum(_ seq: [Double]) -> [Double] {
     return seq.reduce(into: []) { $0.append(($0.last ?? 0) + $1) }
 }
 
-/// Errors that can be thrown by a DiscreteDistribution<T>
-enum DiscreteDistributionError: Error {
+/// Errors that can be thrown by a WeightedDistribution<T>
+enum WeightedDistributionError: Error {
     case badRandomValue(randomValue: Double, partialSum: [Double])
 }
 
 /// A discrete distribution of events.
-class DiscreteDistribution<T>: Distribution {
+class WeightedDistribution<T>: Distribution {
     typealias Element = (T, Double)
     typealias Iterator = Zip2Sequence<Array<T>, Array<Double>>.Iterator
     
@@ -39,13 +39,13 @@ class DiscreteDistribution<T>: Distribution {
         return zip(events, weights).map({t($0) * $1}).reduce(0, +)
     }
     
-    func getNext() throws -> T {
+    func getNext() -> T? {
         let rand = Double.random(in: 0...1)
         if let index = psum.firstIndex(where: {x -> Bool in rand <= x}) {
             return events[index]
         }
         else {
-            throw DiscreteDistributionError.badRandomValue(randomValue: rand, partialSum: psum)
+            return nil
         }
     }
     
@@ -67,7 +67,7 @@ class DiscreteDistribution<T>: Distribution {
         return nil
     }
     
-    func makeIterator() -> DiscreteDistribution<T>.Iterator {
+    func makeIterator() -> WeightedDistribution<T>.Iterator {
         return zip(events, weights).makeIterator()
     }
 }

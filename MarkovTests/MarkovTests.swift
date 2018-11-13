@@ -13,8 +13,8 @@ class MarkovTests: XCTestCase {
 
     override func setUp() {
         mdp = TableDrivenMDP<TextWorldAction, TextWorldState>(transitionTable:
-            [TextWorldState.start: [TextWorldAction.north: DiscreteDistribution(weightedEvents: [(Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.7),                                                                                                           (Transition(state: TextWorldState.pitOfDespair, reward: -1000),0.1), (Transition(state: TextWorldState.start, reward: 0), 0.2)])],
-             TextWorldState.meadowOfTranquility: [TextWorldAction.east: DiscreteDistribution(weightedEvents: [(Transition(state: TextWorldState.end, reward: 100), 0.5),                                                                                                                                      (Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.5)]), TextWorldAction.south: DiscreteDistribution(weightedEvents: [(Transition(state: TextWorldState.start, reward: 0), 0.5), (Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.5)])]])
+            [TextWorldState.start: [TextWorldAction.north: WeightedDistribution(weightedEvents: [(Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.7),                                                                                                           (Transition(state: TextWorldState.pitOfDespair, reward: -1000),0.1), (Transition(state: TextWorldState.start, reward: 0), 0.2)])],
+             TextWorldState.meadowOfTranquility: [TextWorldAction.east: WeightedDistribution(weightedEvents: [(Transition(state: TextWorldState.end, reward: 100), 0.5),                                                                                                                                      (Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.5)]), TextWorldAction.south: WeightedDistribution(weightedEvents: [(Transition(state: TextWorldState.start, reward: 0), 0.5), (Transition(state: TextWorldState.meadowOfTranquility, reward: 20), 0.5)])]])
     }
 
     override func tearDown() {

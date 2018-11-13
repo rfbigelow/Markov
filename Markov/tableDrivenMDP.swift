@@ -15,12 +15,12 @@ class TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
     }
 
     /// The tabular representation of the MDP.
-    internal var transitions: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition<State>>>>
+    internal var transitions: Dictionary<State, Dictionary<Action, WeightedDistribution<Transition<State>>>>
     
     /// Initializes this MDP with the following tables:
     /// - parameter transitionTable: A table that maps each state to a dictionary that describes the transitions from that state.
     /// - parameter rewardTable: A table that maps each state to the reward that is collected when that state is reached.
-    init(transitionTable: Dictionary<State, Dictionary<Action, DiscreteDistribution<Transition<State>>>>) {
+    init(transitionTable: Dictionary<State, Dictionary<Action, WeightedDistribution<Transition<State>>>>) {
         transitions = transitionTable
     }
     
@@ -65,15 +65,10 @@ class TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
     /// Performs a transition from the given state to a new state by doing the specified action.
     func transition(fromState s: State, byTakingAction a: Action) -> (State, Reward) {
         if let moves = transitions[s], let fuzzyState = moves[a] {
-                do {
-                        let transition = try fuzzyState.getNext()
-                        return (transition.state, transition.reward)
-                } catch DiscreteDistributionError.badRandomValue(let randomValue, let partialSum) {
-                    print("Could not get next action due to bad random value \(randomValue) and partial sum \(partialSum).")
-                } catch {
-                    print("Unexpected error.")
-                }
+            if let transition = fuzzyState.getNext() {
+                return (transition.state, transition.reward)
             }
+        }
         return (s, 0)
     }
     
