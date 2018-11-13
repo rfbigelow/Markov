@@ -17,8 +17,15 @@ func getStateValue<TModel: MarkovDecisionProcess, TPolicy: Policy>(
         for action in actions {
             let actionProb = policy.getProbability(fromState: state, ofTaking: action)
             let actionReward = mdp.getReward(fromState: state, forTakingAction: action)
-            let (nextState, _) = mdp.transition(fromState: state, byTakingAction: action)
-            sum += actionProb * (actionReward + discount * v(nextState))
+            var nextStateValue = 0.0
+            if let transitions = mdp.getTransitions(fromState: state, forTakingAction: action) {
+                for transition in transitions {
+                    let transitionProb = transition.1
+                    let nextState = transition.0.state
+                    nextStateValue += transitionProb * v(nextState)
+                }
+            }
+            sum += actionProb * (actionReward + discount * nextStateValue)
         }
     }
     return sum

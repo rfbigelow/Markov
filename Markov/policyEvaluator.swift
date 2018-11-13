@@ -6,6 +6,8 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
+/// Policy evaluators use a model to iteratively build an estimate of the state-value function for following
+/// a given policy.
 class PolicyEvaluator<T: MarkovDecisionProcess> {
     
     var estimates: Dictionary<T.State, Reward> = Dictionary()

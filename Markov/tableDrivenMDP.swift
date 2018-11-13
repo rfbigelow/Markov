@@ -64,8 +64,8 @@ class TableDrivenMDP<Action: Hashable, State: Hashable>: MarkovDecisionProcess {
     
     /// Performs a transition from the given state to a new state by doing the specified action.
     func transition(fromState s: State, byTakingAction a: Action) -> (State, Reward) {
-        if let moves = transitions[s], let fuzzyState = moves[a] {
-            if let transition = fuzzyState.getNext() {
+        if let moves = transitions[s], let distribution = moves[a] {
+            if let transition = distribution.getNext() {
                 return (transition.state, transition.reward)
             }
         }

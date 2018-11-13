@@ -6,6 +6,7 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
+/// A policy that randomly selects from all available actions, with equal probability.
 struct RandomSelectPolicy<T: MarkovDecisionProcess>: Policy {
     typealias Action = T.Action
     typealias State = T.State

@@ -6,6 +6,7 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
+/// A policy improver uses a model to improve a policy given a state-value function.
 class PolicyImprover<TModel: MarkovDecisionProcess> {
     
     let mdp: TModel

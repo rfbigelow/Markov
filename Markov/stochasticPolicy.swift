@@ -6,6 +6,7 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
+/// A policy that randomly selects from one of a distribution of equally probable actions.
 struct StochasticPolicy<T: MarkovDecisionProcess>: Policy {
     typealias Action = T.Action
     typealias State = T.State
