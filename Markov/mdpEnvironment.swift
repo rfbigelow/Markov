@@ -24,6 +24,12 @@ struct MdpEnvironment<T: MarkovDecisionProcess>: Environment {
         currentState = initialState
     }
     
+    /// Gets the actions that are available from the given state.
+    func getActions(forState s: State) -> Set<Action>? {
+        return mdp.getActions(forState: s)
+    }
+
+    
     mutating func select(action: Action) -> (State, Reward) {
         let transition = mdp.transition(fromState: currentState, byTakingAction: action)
         currentState = transition.0

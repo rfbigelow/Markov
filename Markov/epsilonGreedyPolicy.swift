@@ -14,6 +14,7 @@ struct EpsilonGreedyPolicy<State: Hashable, Action: Hashable>: Policy {
     
     let epsilon: Double
     
+    /// Initializes an epsilon-greedy policy
     init(actionsForStateDelegate: @escaping (State) -> Set<Action>?,
          actionValueDelegate: @escaping (State, Action) -> Reward,
          epsilon: Double) {
@@ -30,6 +31,7 @@ struct EpsilonGreedyPolicy<State: Hashable, Action: Hashable>: Policy {
         
         let rand = Double.random(in: 0...1)
         if rand < epsilon {
+            print("epsilon, my friend")
             return 1.0 / Double(actions.count)
         }
         
@@ -48,6 +50,7 @@ struct EpsilonGreedyPolicy<State: Hashable, Action: Hashable>: Policy {
         
         let rand = Double.random(in: 0...1)
         if rand < epsilon {
+            print("epsilon, my friend")
             return actions.randomElement()
         }
         

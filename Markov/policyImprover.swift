@@ -45,7 +45,7 @@ class PolicyImprover<TModel: MarkovDecisionProcess> {
     
     static func getOptimalPolicy(forModel mdp:TModel, withTolerance epsilon: Double, withDiscount gamma: Double) -> StochasticPolicy<TModel> {
         let improver = PolicyImprover(mdp: mdp, gamma: gamma)
-        let evaluator = PolicyEvaluator(mdp: mdp, epsilon: epsilon, gamma: gamma)
+        let evaluator = PolicyEvaluator(mdp: mdp, tolerance: epsilon, discount: gamma)
         let initialPolicy = RandomSelectPolicy(mdp: mdp)
         
         var priorEstimates = evaluator.estimates

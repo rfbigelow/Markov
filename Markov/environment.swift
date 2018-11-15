@@ -17,6 +17,9 @@ protocol Environment {
     /// Gets the actions that are available to select from the current state.
     var availableActions: Set<Action>? { get }
     
+    /// Gets the actions that are available from the given state.
+    func getActions(forState s: State) -> Set<Action>?
+
     /// Selects the given action and performs it, causing the environment to produce a reward and a new state.
     mutating func select(action: Action) -> (State, Reward)
 }

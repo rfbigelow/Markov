@@ -68,7 +68,7 @@ class GridWorldTests: XCTestCase {
         gridWorld.addNexus(from: GridSquare(x: 1, y: 4), to: GridSquare(x: 1, y: 0), withReward: 10.0)
         gridWorld.addNexus(from: GridSquare(x: 3, y: 4), to: GridSquare(x: 3, y: 2), withReward: 5.0)
         
-        let policyEvaluator = PolicyEvaluator(mdp: gridWorld, epsilon: 0.01, gamma: 0.9)
+        let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.01, discount: 0.9)
         let policy = RandomSelectPolicy(mdp: gridWorld)
 
         policyEvaluator.evaluate(policy: policy)
@@ -85,10 +85,36 @@ class GridWorldTests: XCTestCase {
     }
     
     func testOptimalPolicy() {
-        gridWorld.addNexus(from: GridSquare(x: 1, y: 4), to: GridSquare(x: 1, y: 0), withReward: 10.0)
-        gridWorld.addNexus(from: GridSquare(x: 3, y: 4), to: GridSquare(x: 3, y: 3), withReward: 20.0)
         let optimal = PolicyImprover.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.4, withDiscount: 0.95)
-        playGridWorld(gridWorld: gridWorld, withPolicy: optimal, currentState: &currentState, score: &score, plays: 12)
+        playGridWorld(gridWorld: gridWorld, withPolicy: optimal, currentState: &currentState, score: &score, plays: 100)
+        XCTAssert(score == 0.0, "Optimal policy failed to avoid the walls.")
+    }
+    
+    func testEpsilonGreedyPolicy() {
+        let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
+        
+        // Cheat by using DP to get an optimal policy. This will back our Q(s,a) function, since we don't have a learner.
+        let optimal = PolicyImprover.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.1, withDiscount: 0.9)
+        let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.01, discount: 0.9)
+        policyEvaluator.evaluate(policy: optimal)
+        
+        // Now create our epsilon-greedy policy. It will have perfect knowledge learned from our DP policy evaluator.
+        // However, it will sometimes make a "mistake" by going off-policy, according to our epsilon value.
+        let egreedy = EpsilonGreedyPolicy(
+            actionsForStateDelegate: { environment.getActions(forState: $0) },
+            actionValueDelegate: { getActionValue(
+                forState: $0,
+                withAction: $1,
+                mdp: self.gridWorld,
+                discount: 0.9,
+                v: { policyEvaluator.estimates[$0] ?? 0.0})},
+            epsilon: 0.1)
+        
+        // Make a bunch of moves so we can see how many mistakes were made.
+        playGridWorld(gridWorld: gridWorld, withPolicy: egreedy, currentState: &currentState, score: &score, plays: 1000)
+        
+        // Just make sure it didn't play a perfect game. If it did, then it did not explore at all.
+        XCTAssert(score < 0.0, "Epsilon-greedy played a perfect game. That doesn't seem right.")
     }
 }
 

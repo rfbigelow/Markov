@@ -11,16 +11,16 @@
 class PolicyEvaluator<T: MarkovDecisionProcess> {
     
     var estimates: Dictionary<T.State, Reward> = Dictionary()
-    let epsilon: Double
-    let gamma: Double
+    let tolerance: Double
+    let discount: Double
     let mdp: T
     
     var iterations: Int = 0
     
-    init(mdp: T, epsilon: Double, gamma: Double) {
+    init(mdp: T, tolerance: Double, discount: Double) {
         self.mdp = mdp
-        self.epsilon = epsilon
-        self.gamma = gamma
+        self.tolerance = tolerance
+        self.discount = discount
     }
     
     func evaluate<TPolicy: Policy>(policy: TPolicy) where TPolicy.State == T.State, TPolicy.Action == T.Action {
@@ -32,7 +32,7 @@ class PolicyEvaluator<T: MarkovDecisionProcess> {
             maxDelta = 0.0
             for state in states {
                 let oldEstimate = estimates[state] ?? 0.0
-                let stateValue = getStateValue(forState: state, withModel: mdp, policy: policy, discount: gamma, v: { estimates[$0] ?? 0.0 })
+                let stateValue = getStateValue(forState: state, withModel: mdp, policy: policy, discount: discount, v: { estimates[$0] ?? 0.0 })
                 estimates[state] = stateValue
                 let delta = abs(oldEstimate - stateValue)
                 if delta > maxDelta {
@@ -40,7 +40,7 @@ class PolicyEvaluator<T: MarkovDecisionProcess> {
                 }
             }
             iterations += 1
-        } while maxDelta > epsilon
+        } while maxDelta > tolerance
         print("Converged in \(iterations) iterations.")
     }
 }
