@@ -38,6 +38,8 @@
 		7D6A55A6219A22C200C6BE35 /* binDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55A4219A22C200C6BE35 /* binDistribution.swift */; };
 		7D6A55A8219A300200C6BE35 /* stochasticPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55A7219A300200C6BE35 /* stochasticPolicy.swift */; };
 		7D6A55A9219A300200C6BE35 /* stochasticPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55A7219A300200C6BE35 /* stochasticPolicy.swift */; };
+		7D6A55AB219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55AA219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift */; };
+		7D6A55AC219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55AA219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift */; };
 		7DB284A9218FD2B8006B0A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB284A8218FD2B8006B0A83 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,7 @@
 		7D6A55A1219A1D2900C6BE35 /* policyImprover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = policyImprover.swift; sourceTree = "<group>"; };
 		7D6A55A4219A22C200C6BE35 /* binDistribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = binDistribution.swift; sourceTree = "<group>"; };
 		7D6A55A7219A300200C6BE35 /* stochasticPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stochasticPolicy.swift; sourceTree = "<group>"; };
+		7D6A55AA219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = epsilonGreedyPolicy.swift; sourceTree = "<group>"; };
 		7D79E029219294C6003B3895 /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
 		7D79E02B21929509003B3895 /* markovDecisionProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = markovDecisionProcess.swift; sourceTree = "<group>"; };
 		7D79E02D21929553003B3895 /* distribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = distribution.swift; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 				7D6A55A1219A1D2900C6BE35 /* policyImprover.swift */,
 				7D6A55A4219A22C200C6BE35 /* binDistribution.swift */,
 				7D6A55A7219A300200C6BE35 /* stochasticPolicy.swift */,
+				7D6A55AA219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift */,
 			);
 			path = Markov;
 			sourceTree = "<group>";
@@ -250,6 +254,7 @@
 				7D6A55942197F0AB00C6BE35 /* gridWorld.swift in Sources */,
 				7D6A55972198A87500C6BE35 /* GridWorldTests.swift in Sources */,
 				7D6A55A9219A300200C6BE35 /* stochasticPolicy.swift in Sources */,
+				7D6A55AC219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift in Sources */,
 				7D6A55912196430400C6BE35 /* policy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +277,7 @@
 				7D6A55932197F0AB00C6BE35 /* gridWorld.swift in Sources */,
 				7D6A55A5219A22C200C6BE35 /* binDistribution.swift in Sources */,
 				7D6A55A2219A1D2900C6BE35 /* policyImprover.swift in Sources */,
+				7D6A55AB219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift in Sources */,
 				7D6A55992198F8C000C6BE35 /* policyEvaluator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
