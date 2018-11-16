@@ -22,3 +22,8 @@ protocol Distribution: Sequence {
     /// Gets the event matching the given predicate, if a match is found.
     func getEvent(matching isMatch:(T) -> Bool) -> T?
 }
+
+/// Forms the prefix sum of the given sequence.
+func prefixSum<T: Numeric>(_ seq: [T]) -> [T] {
+    return seq.reduce(into: []) { $0.append(($0.last ?? 0) + $1) }
+}

@@ -6,11 +6,6 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-/// Forms the prefix sum of the given sequence.
-func prefixSum(_ seq: [Double]) -> [Double] {
-    return seq.reduce(into: []) { $0.append(($0.last ?? 0) + $1) }
-}
-
 /// Errors that can be thrown by a WeightedDistribution<T>
 enum WeightedDistributionError: Error {
     case badRandomValue(randomValue: Double, partialSum: [Double])

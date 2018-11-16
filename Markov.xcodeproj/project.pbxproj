@@ -40,6 +40,10 @@
 		7D6A55A9219A300200C6BE35 /* stochasticPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55A7219A300200C6BE35 /* stochasticPolicy.swift */; };
 		7D6A55AB219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55AA219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift */; };
 		7D6A55AC219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55AA219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift */; };
+		7D6A55AE219E63E500C6BE35 /* distributionEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55AD219E63E500C6BE35 /* distributionEstimator.swift */; };
+		7D6A55AF219E63E500C6BE35 /* distributionEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55AD219E63E500C6BE35 /* distributionEstimator.swift */; };
+		7D6A55B1219F23B500C6BE35 /* qLearner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55B0219F23B500C6BE35 /* qLearner.swift */; };
+		7D6A55B2219F23B500C6BE35 /* qLearner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55B0219F23B500C6BE35 /* qLearner.swift */; };
 		7DB284A9218FD2B8006B0A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB284A8218FD2B8006B0A83 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +75,8 @@
 		7D6A55A4219A22C200C6BE35 /* binDistribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = binDistribution.swift; sourceTree = "<group>"; };
 		7D6A55A7219A300200C6BE35 /* stochasticPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stochasticPolicy.swift; sourceTree = "<group>"; };
 		7D6A55AA219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = epsilonGreedyPolicy.swift; sourceTree = "<group>"; };
+		7D6A55AD219E63E500C6BE35 /* distributionEstimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = distributionEstimator.swift; sourceTree = "<group>"; };
+		7D6A55B0219F23B500C6BE35 /* qLearner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qLearner.swift; sourceTree = "<group>"; };
 		7D79E029219294C6003B3895 /* environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = environment.swift; sourceTree = "<group>"; };
 		7D79E02B21929509003B3895 /* markovDecisionProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = markovDecisionProcess.swift; sourceTree = "<group>"; };
 		7D79E02D21929553003B3895 /* distribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = distribution.swift; sourceTree = "<group>"; };
@@ -146,6 +152,8 @@
 				7D6A55A4219A22C200C6BE35 /* binDistribution.swift */,
 				7D6A55A7219A300200C6BE35 /* stochasticPolicy.swift */,
 				7D6A55AA219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift */,
+				7D6A55AD219E63E500C6BE35 /* distributionEstimator.swift */,
+				7D6A55B0219F23B500C6BE35 /* qLearner.swift */,
 			);
 			path = Markov;
 			sourceTree = "<group>";
@@ -253,9 +261,11 @@
 				7D6A559D21991EEB00C6BE35 /* randomSelectPolicy.swift in Sources */,
 				7D6A55942197F0AB00C6BE35 /* gridWorld.swift in Sources */,
 				7D6A55972198A87500C6BE35 /* GridWorldTests.swift in Sources */,
+				7D6A55B2219F23B500C6BE35 /* qLearner.swift in Sources */,
 				7D6A55A9219A300200C6BE35 /* stochasticPolicy.swift in Sources */,
 				7D6A55AC219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift in Sources */,
 				7D6A55912196430400C6BE35 /* policy.swift in Sources */,
+				7D6A55AF219E63E500C6BE35 /* distributionEstimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +277,7 @@
 				7D6A559F2199DC1700C6BE35 /* valueFunctions.swift in Sources */,
 				7D6A559C21991EEB00C6BE35 /* randomSelectPolicy.swift in Sources */,
 				7D6A557C21932F8B00C6BE35 /* weightedDistribution.swift in Sources */,
+				7D6A55AE219E63E500C6BE35 /* distributionEstimator.swift in Sources */,
 				7DB284A9218FD2B8006B0A83 /* main.swift in Sources */,
 				7D6A55A8219A300200C6BE35 /* stochasticPolicy.swift in Sources */,
 				7D6A557F21932F8B00C6BE35 /* distribution.swift in Sources */,
@@ -279,6 +290,7 @@
 				7D6A55A2219A1D2900C6BE35 /* policyImprover.swift in Sources */,
 				7D6A55AB219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift in Sources */,
 				7D6A55992198F8C000C6BE35 /* policyEvaluator.swift in Sources */,
+				7D6A55B1219F23B500C6BE35 /* qLearner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

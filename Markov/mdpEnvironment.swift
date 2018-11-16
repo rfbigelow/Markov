@@ -29,6 +29,9 @@ struct MdpEnvironment<T: MarkovDecisionProcess>: Environment {
         return mdp.getActions(forState: s)
     }
 
+    mutating func reset(initialState: State) {
+        currentState = initialState
+    }
     
     mutating func select(action: Action) -> (State, Reward) {
         let transition = mdp.transition(fromState: currentState, byTakingAction: action)
