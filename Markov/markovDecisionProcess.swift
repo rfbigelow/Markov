@@ -28,8 +28,10 @@ protocol MarkovDecisionProcess {
     /// Gets the reward value for taking action a and transitioning to state next.
     func getReward(fromState s: State, forTakingAction a: Action, transitioningTo next: State) -> Reward
     
+    /// Gets the distribution of transitions that may occur when taking action a from state s, as an array of tuples where the first element is the transition and the second element is the probability of the transition occurring.
     func getTransitions(fromState s: State, forTakingAction a: Action) -> [(Transition<State>, Double)]?
     
+    /// Gets the distribution of transitions that may occur when taking action `a` from state `s` and transitioning to state `next`, as an array of tuples where the first element is the transition and the second element is the probability of the transition occurring.
     func getTransitions(fromState s: State, forTakingAction a: Action, transitioningTo next: State) -> [(Transition<State>, Double)]?
     
     /// Performs a transition from the state s to a new state by taking action a.
