@@ -54,3 +54,46 @@ The framework defines the following protocols in order to lay out the Reinforcem
 
 * `Policy`  A policy represents a plan or strategy that an agent will follow...when in this state, perform this action...in order to maximize long-term gains. Policies are probabilistic. Rather than give a single action, they return the probability of taking an action from the given state.
 
+## Structs
+
+### Distributions
+
+* `WeightedDistribution`    Represents a simple distribution of weighted events. The weights, which are of type `Double`, must sum to `1.0`.
+
+* `BinDistribution`  Represents a distribution of events that all have an equal chance of occurring (think of a bin full of balls.) Very convenient, and very space-inefficient, since even identical events are represented by separate values.
+
+* `DistributionEstimator`   Represents a sample-based estimate of a distribution by counting events as they occur.
+
+### Policies
+
+* `RandomSelectPolicy`  A policy that randomly selects from all available actions, with equal probability.
+
+* `StochasticPolicy`    A policy that randomly selects from one of a distribution of equally probable actions. This differs from the `RandomSelectPolicy` in that the distributions are configurable, and it does not require a `MarkovDecisionProcess` to provide the available actions. This is used by the `PolicyImprover` to track more than one "best" action for any given situation, which allows for more exploration of the state space when using the policy.
+
+* `EpsilonGreedyPolicy` A policy that chooses the best possible action for a given state most of the time, but occassionally (with probability `epsilon`) selects a random action. This is used to tune the exploit/explore qualities of a reinforcement learning algorithm. If `epsilon` is `0.0` then this will act as a greedy policy.
+
+## Classes
+
+### MDPs
+
+* `TableDrivenMDP`  Provides a tabular implementation of the `MarkovDecisionProcess` protocol. Tabular representations provide a common means of defining MDPs, but they require space for all of the possible states, along with all of the transitions between those states. Great for smaller problems.
+
+* `GridWorld`   A tabular implementation of the Grid World MDP from Sutton and Barto. This implementation sets up the grid with walls around the perimeter, each of which has a reward value of -1.0. The grid can then be customized by adding two types of features. The first feature is a *nexus*, which is a grid square that, once entered, leads to a target grid square no matter which direction is chosen by the agent. The reward for this can be specified. The second feature is a *vortex*, which is a grid square from which there is no escape. The reward can also be specified for this feature. If you want to create a GridWorld with an end goal, you can do so by adding a *vortex* with a positive reward.
+
+### Dynamic Programming
+
+* `PolicyEvaluator` This class implements *value iteration* in order to determine the value function for a given policy.
+
+* `PolicyImprover`  This class implements *policy iteration* in order to improve a given policy. It also implements *generalize policy iteration* or GPI in order to find an optimal policy.
+
+### Q-Learning
+
+* `QLearner`    Implements q-learning, which is an off-policy reinforcement learning technique.
+
+## Functions
+
+### Dynamic Programming
+
+* `getStateValue`   A *state value function* (i.e. V_pi(s)) used for policy evaluation.
+
+* `getActionValue`  An *action value function* (i.e. Q_pi(s, a)) used for policy improvement.
