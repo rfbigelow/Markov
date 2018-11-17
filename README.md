@@ -88,7 +88,7 @@ The framework defines the following protocols in order to lay out the Reinforcem
 
 ### Q-Learning
 
-* `QLearner`    Implements q-learning, which is an off-policy reinforcement learning technique.
+* `QLearner`    Implements *q learning*, which is an off-policy reinforcement learning technique.
 
 ## Functions
 
