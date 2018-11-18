@@ -91,6 +91,7 @@
 		7DB284A5218FD2B8006B0A83 /* Markov */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Markov; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DB284A8218FD2B8006B0A83 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		7DC48C9421A1E73700ED17B6 /* valueIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = valueIterator.swift; sourceTree = "<group>"; };
+		7DC48C9721A1F49500ED17B6 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +126,7 @@
 		7DB2849C218FD2B8006B0A83 = {
 			isa = PBXGroup;
 			children = (
+				7DC48C9721A1F49500ED17B6 /* LICENSE.txt */,
 				7D6A558721934BE000C6BE35 /* README.md */,
 				7DB284A7218FD2B8006B0A83 /* Markov */,
 				7D6A556F2192D31E00C6BE35 /* MarkovTests */,
