@@ -20,7 +20,7 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
     let rowCount: Int
     let columnCount: Int
     
-    init(rows: Int, columns: Int) {
+    init(rows: Int, columns: Int, movementCost: Double = -1.0, wallPenalty: Double = -1.0) {
         rowCount = rows
         columnCount = columns
         var grid = Dictionary<State, Dictionary<Action, WeightedDistribution<Transition<State>>>>()
@@ -28,10 +28,18 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
             for j in 0..<rows {
                 let gs = GridSquare(x: i, y: j)
                 var moves = Dictionary<GridAction, WeightedDistribution<Transition<State>>>()
-                moves[GridAction.up] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.up, rowCount: rows, columnCount: columns)
-                moves[GridAction.down] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.down, rowCount: rows, columnCount: columns)
-                moves[GridAction.left] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.left, rowCount: rows, columnCount: columns)
-                moves[GridAction.right] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.right, rowCount: rows, columnCount: columns)
+                moves[GridAction.up] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.up,
+                                                            rowCount: rows, columnCount: columns,
+                                                            movementCost: movementCost, wallPenalty: wallPenalty)
+                moves[GridAction.down] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.down,
+                                                              rowCount: rows, columnCount: columns,
+                                                              movementCost: movementCost, wallPenalty: wallPenalty)
+                moves[GridAction.left] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.left,
+                                                              rowCount: rows, columnCount: columns,
+                                                              movementCost: movementCost, wallPenalty: wallPenalty)
+                moves[GridAction.right] = GridWorld.createMove(forGridSquare: gs, andAction: GridAction.right,
+                                                               rowCount: rows, columnCount: columns,
+                                                               movementCost: movementCost, wallPenalty: wallPenalty)
                 grid[gs] = moves
             }
         }
@@ -53,38 +61,61 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
         transitions[at] = nil
     }
     
-    private static func createMove(forGridSquare gs: GridSquare, andAction action: GridAction, rowCount: Int, columnCount: Int) -> WeightedDistribution<Transition<State>> {
+    private static func createMove(forGridSquare gs: GridSquare,
+                                   andAction action: GridAction,
+                                   rowCount: Int,
+                                   columnCount: Int,
+                                   movementCost: Double,
+                                   wallPenalty: Double) -> WeightedDistribution<Transition<State>> {
         var transition: Transition<State>
         switch action {
         case GridAction.up:
             if gs.y == rowCount - 1 {
-                transition = Transition(state: GridSquare(x: gs.x, y: gs.y), reward: -1.0)
+                transition = Transition(state: GridSquare(x: gs.x, y: gs.y), reward: wallPenalty)
             }
             else {
-                transition = Transition(state: GridSquare(x: gs.x, y: gs.y + 1), reward: 0.0)
+                transition = Transition(state: GridSquare(x: gs.x, y: gs.y + 1), reward: movementCost)
             }
         case GridAction.down:
             if gs.y == 0 {
-                transition = Transition(state: GridSquare(x: gs.x, y: gs.y), reward: -1.0)
+                transition = Transition(state: GridSquare(x: gs.x, y: gs.y), reward: wallPenalty)
             }
             else {
-                transition = Transition(state: GridSquare(x: gs.x, y: gs.y - 1), reward: 0.0)
+                transition = Transition(state: GridSquare(x: gs.x, y: gs.y - 1), reward: movementCost)
             }
         case GridAction.left:
             if gs.x == 0 {
-                transition = Transition(state: GridSquare(x: gs.x, y: gs.y), reward: -1.0)
+                transition = Transition(state: GridSquare(x: gs.x, y: gs.y), reward: wallPenalty)
             }
             else {
-                transition = Transition(state: GridSquare(x: gs.x - 1, y: gs.y), reward: 0.0)
+                transition = Transition(state: GridSquare(x: gs.x - 1, y: gs.y), reward: movementCost)
             }
         case GridAction.right:
             if gs.x == columnCount - 1 {
-                transition = Transition(state: GridSquare(x: gs.x, y: gs.y), reward: -1.0)
+                transition = Transition(state: GridSquare(x: gs.x, y: gs.y), reward: wallPenalty)
             }
             else {
-                transition = Transition(state: GridSquare(x: gs.x + 1, y: gs.y), reward: 0.0)
+                transition = Transition(state: GridSquare(x: gs.x + 1, y: gs.y), reward: movementCost)
             }
         }
         return WeightedDistribution(weightedEvents: [(transition, 1.0)])
     }
+}
+
+func playGridWorld<T: Policy>(gridWorld: GridWorld, withPolicy policy: T, currentState: inout GridSquare, score: inout Double, plays: Int)
+    where T.Action == GridWorld.Action, T.State == GridWorld.State {
+        print(currentState, score)
+        for _ in 0..<plays {
+            if let action = policy.getAction(forState: currentState) {
+                var reward = 0.0
+                (currentState, reward) = gridWorld.transition(fromState: currentState, byTakingAction: action)
+                score += reward
+                print(action, reward)
+                print(currentState, score)
+            }
+            else {
+                break
+            }
+        }
+        print(score)
 }

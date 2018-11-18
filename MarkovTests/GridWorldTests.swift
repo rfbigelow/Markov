@@ -15,7 +15,7 @@ class GridWorldTests: XCTestCase {
     var currentState = GridSquare(x: 0, y: 0)
 
     override func setUp() {
-        gridWorld = GridWorld(rows: 25, columns: 25)
+        gridWorld = GridWorld(rows: 25, columns: 25, movementCost: 0.0)
         score = 0.0
         currentState = GridSquare(x: 0, y: 0)
     }
@@ -84,14 +84,6 @@ class GridWorldTests: XCTestCase {
         }
     }
     
-    func testOptimalPolicy() {
-        let reward = 100.0
-        gridWorld.addVortex(at: GridSquare(x: 24, y: 24), withReward: reward)
-        let optimal = PolicyImprover.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
-        playGridWorld(gridWorld: gridWorld, withPolicy: optimal, currentState: &currentState, score: &score, plays: 100)
-        XCTAssert(score == reward)
-    }
-    
     func testEpsilonGreedyPolicy() {
         let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
         
@@ -118,43 +110,4 @@ class GridWorldTests: XCTestCase {
         // Just make sure it didn't play a perfect game. If it did, then it did not explore at all.
         XCTAssert(score < 0.0, "Epsilon-greedy played a perfect game. That doesn't seem right.")
     }
-    
-    func testQLearner() {
-        gridWorld.addVortex(at: GridSquare(x: 24, y: 24), withReward: 100.0)
-
-        let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
-        let learner = QLearner(environment: environment, discount: 1.0, stepSize: 0.0001)
-        let policy = EpsilonGreedyPolicy(
-            actionsForStateDelegate: { environment.getActions(forState: $0) },
-            actionValueDelegate: { learner.getEstimate(forState: $0, action: $1) },
-            epsilon: 0.1)
-
-        for _ in 0..<100 {
-            learner.learn(withPolicy: policy, fromState: GridSquare(x: 0, y: 0), forSteps: 500)
-        }
-        
-        let greedy = EpsilonGreedyPolicy(
-            actionsForStateDelegate: { environment.getActions(forState: $0) },
-            actionValueDelegate: { learner.getEstimate(forState: $0, action: $1) },
-            epsilon: 0.0)
-        playGridWorld(gridWorld: gridWorld, withPolicy: greedy, currentState: &currentState, score: &score, plays: 100)
-    }
-}
-
-func playGridWorld<T: Policy>(gridWorld: GridWorld, withPolicy policy: T, currentState: inout GridSquare, score: inout Double, plays: Int)
-where T.Action == GridWorld.Action, T.State == GridWorld.State {
-    print(currentState, score)
-    for _ in 0..<plays {
-        if let action = policy.getAction(forState: currentState) {
-            var reward = 0.0
-            (currentState, reward) = gridWorld.transition(fromState: currentState, byTakingAction: action)
-            score += reward
-            print(action, reward)
-            print(currentState, score)
-        }
-        else {
-            break
-        }
-    }
-    print(score)
 }
