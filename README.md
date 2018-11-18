@@ -40,7 +40,7 @@ The `Transition` type pairs a state with a reward. It is important to realize th
 
 ## Reinforcement Learning and the Environment
 
-While the Markov Decision Process model provides all of the informatino necessary to compute an optimal policy, this is not usually available to an agent. Instead, the agent is typically confronted with an environment, where it must learn from experience what "rewards" await it (remember, a reward can be negative as well as positive.) In this framework, the *agent-environment interface* is provided by the `Environment` protocol. If you already have an MDP, then you can easily hide it behind an `Environment` interface with the `MdpEnvironment` class. All that is required besides the actual MDP is the initial state to place the environment in.
+While the Markov Decision Process model provides all of the information necessary to compute an optimal policy, this is not usually available to an agent. Instead, the agent is typically confronted with an environment, where it must learn from experience what "rewards" await it (remember, a reward can be negative as well as positive.) In this framework, the *agent-environment interface* is provided by the `Environment` protocol. If you already have an MDP, then you can easily hide it behind an `Environment` interface with the `MdpEnvironment` class. All that is required besides the actual MDP is the initial state to place the environment in.
 
 ## Protocols
 
