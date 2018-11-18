@@ -73,7 +73,7 @@ class GridWorldTests: XCTestCase {
 
         policyEvaluator.evaluate(policy: policy)
         
-        let policyImprover = PolicyImprover(mdp: gridWorld, gamma: 0.9)
+        let policyImprover = PolicyIterator(mdp: gridWorld, gamma: 0.9)
         let improvedPolicy = policyImprover.improve(policy: policy, withValueFunction: { policyEvaluator.estimates[$0] ?? 0.0 })
         let priorEstimates = policyEvaluator.estimates
 
@@ -88,7 +88,7 @@ class GridWorldTests: XCTestCase {
         let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
         
         // Cheat by using DP to get an optimal policy. This will back our Q(s,a) function, since we don't have a learner.
-        let optimal = PolicyImprover.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.1, withDiscount: 0.9)
+        let optimal = PolicyIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.1, withDiscount: 0.9)
         let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.01, discount: 0.9)
         policyEvaluator.evaluate(policy: optimal)
         

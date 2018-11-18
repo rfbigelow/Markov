@@ -6,8 +6,8 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
-/// A policy improver uses a model to improve a policy given a state-value function.
-class PolicyImprover<TModel: MarkovDecisionProcess> {
+/// A policy iterator uses a model to improve a policy given a state-value function.
+class PolicyIterator<TModel: MarkovDecisionProcess> {
     
     let mdp: TModel
     let gamma: Double
@@ -44,7 +44,7 @@ class PolicyImprover<TModel: MarkovDecisionProcess> {
     }
     
     static func getOptimalPolicy(forModel mdp:TModel, withTolerance epsilon: Double, withDiscount gamma: Double) -> StochasticPolicy<TModel> {
-        let improver = PolicyImprover(mdp: mdp, gamma: gamma)
+        let improver = PolicyIterator(mdp: mdp, gamma: gamma)
         let evaluator = PolicyEvaluator(mdp: mdp, tolerance: epsilon, discount: gamma)
         let initialPolicy = RandomSelectPolicy(mdp: mdp)
         

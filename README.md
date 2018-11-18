@@ -82,9 +82,11 @@ The framework defines the following protocols in order to lay out the Reinforcem
 
 ### Dynamic Programming
 
-* `PolicyEvaluator` This class implements *value iteration* in order to determine the value function for a given policy.
+* `PolicyEvaluator` This class implements *policy evaluation* in order to determine the value function for a given policy.
 
-* `PolicyImprover`  This class implements *policy iteration* in order to improve a given policy. It also implements *generalize policy iteration* or GPI in order to find an optimal policy.
+* `PolicyIterator`  This class implements *policy iteration* in order to improve a given policy. It also implements *generalize policy iteration* or GPI in order to find an optimal policy within a given tolerance.
+
+* `ValueIterator`   This class implements *value iteration* in order to find an optimal policy within a given tolerance.
 
 ### Q-Learning
 

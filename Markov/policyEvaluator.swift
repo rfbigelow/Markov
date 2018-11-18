@@ -23,6 +23,7 @@ class PolicyEvaluator<T: MarkovDecisionProcess> {
         self.discount = discount
     }
     
+    /// Evaluates the given policy.
     func evaluate<TPolicy: Policy>(policy: TPolicy) where TPolicy.State == T.State, TPolicy.Action == T.Action {
         iterations = 0
         estimates.removeAll()

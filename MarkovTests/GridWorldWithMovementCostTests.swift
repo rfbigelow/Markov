@@ -25,15 +25,21 @@ class GridWorldWithMovementCostTests: XCTestCase {
         gridWorld = nil
     }
     
-    func testOptimalPolicy() {
-        let optimal = PolicyImprover.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
+    func testPolicyIteration() {
+        let optimal = PolicyIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
+        playGridWorld(gridWorld: gridWorld, withPolicy: optimal, currentState: &currentState, score: &score, plays: 100)
+        XCTAssert(score == -47.0)
+    }
+    
+    func testValueIteration() {
+        let optimal = ValueIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.90)
         playGridWorld(gridWorld: gridWorld, withPolicy: optimal, currentState: &currentState, score: &score, plays: 100)
         XCTAssert(score == -47.0)
     }
     
     func testQLearner() {
         let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
-        let learner = QLearner(environment: environment, discount: 1.0, stepSize: 0.0001)
+        let learner = QLearner(environment: environment, discount: 0.99, stepSize: 0.0001)
         let policy = EpsilonGreedyPolicy(
             actionsForStateDelegate: { environment.getActions(forState: $0) },
             actionValueDelegate: { learner.getEstimate(forState: $0, action: $1) },
@@ -48,6 +54,7 @@ class GridWorldWithMovementCostTests: XCTestCase {
             actionValueDelegate: { learner.getEstimate(forState: $0, action: $1) },
             epsilon: 0.0)
         playGridWorld(gridWorld: gridWorld, withPolicy: greedy, currentState: &currentState, score: &score, plays: 100)
+        XCTAssert(currentState == GridSquare(x: 24, y: 24))
     }
 
 }
