@@ -84,7 +84,7 @@ The framework defines the following protocols in order to lay out the Reinforcem
 
 * `PolicyEvaluator` This class implements *policy evaluation* in order to determine the value function for a given policy.
 
-* `PolicyIterator`  This class implements *policy iteration* in order to improve a given policy. It also implements *generalize policy iteration* or GPI in order to find an optimal policy within a given tolerance.
+* `PolicyIterator`  This class implements *policy iteration* in order to improve a given policy. It also implements *generalized policy iteration* or GPI in order to find an optimal policy within a given tolerance.
 
 * `ValueIterator`   This class implements *value iteration* in order to find an optimal policy within a given tolerance.
 
