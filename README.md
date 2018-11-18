@@ -1,6 +1,6 @@
 #  Markov: A Reinforcement Learning Framework for Swift
 
-This project is meant to provide a framework for experimenting with Reinforcement Learning concepts using the Swift programming language. It is primarily meant to help me build an understanding of the general reinforcement learning problem, and some of the approaches to solving it.
+This project is meant to provide a framework for experimenting with the Reinforcement Learning concepts from [1], using the Swift programming language. It is primarily meant to help me build an understanding of the general reinforcement learning problem, and some of the approaches to solving it.
 
 ## Markov Decision Processes
 
@@ -99,3 +99,7 @@ The framework defines the following protocols in order to lay out the Reinforcem
 * `getStateValue`   A *state value function* (i.e. V_pi(s)) used for policy evaluation.
 
 * `getActionValue`  An *action value function* (i.e. Q_pi(s, a)) used for policy improvement.
+
+## References
+
+[1] R. S.  Sutton and A. G. Barto, *Reinforcement Learning: an introduction, 2nd ed.* Cambridge, MA: The MIT Press, 2018 
