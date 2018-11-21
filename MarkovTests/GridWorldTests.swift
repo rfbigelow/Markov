@@ -46,7 +46,7 @@ class GridWorldTests: XCTestCase {
     }
     
     func testAddVortex() {
-        gridWorld.addVortex(at: GridSquare(x: 2, y: 2), withReward: -100)
+        gridWorld.addGoal(at: GridSquare(x: 2, y: 2), withReward: -100)
         (currentState, _) = gridWorld.transition(fromState: currentState, byTakingAction: GridAction.up)
         (currentState, _) = gridWorld.transition(fromState: currentState, byTakingAction: GridAction.up)
         (currentState, _) = gridWorld.transition(fromState: currentState, byTakingAction: GridAction.right)
@@ -60,7 +60,7 @@ class GridWorldTests: XCTestCase {
     }
     
     func testVortexPlays() {
-        gridWorld.addVortex(at: GridSquare(x: 2, y: 2), withReward: -100)
+        gridWorld.addGoal(at: GridSquare(x: 2, y: 2), withReward: -100)
         playGridWorld(gridWorld: gridWorld, withPolicy: RandomSelectPolicy(mdp: gridWorld), currentState: &currentState, score: &score, plays: 100)
     }
     

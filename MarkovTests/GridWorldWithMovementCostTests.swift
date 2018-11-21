@@ -16,7 +16,7 @@ class GridWorldWithMovementCostTests: XCTestCase {
     
     override func setUp() {
         gridWorld = GridWorld(rows: 25, columns: 25, movementCost: -1.0)
-        gridWorld.addVortex(at: GridSquare(x: 24, y: 24), withReward: 0.0)
+        gridWorld.addGoal(at: GridSquare(x: 24, y: 24), withReward: 0.0)
         score = 0.0
         currentState = GridSquare(x: 0, y: 0)
     }

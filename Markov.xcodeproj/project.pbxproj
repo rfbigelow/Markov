@@ -50,6 +50,7 @@
 		7DB284A9218FD2B8006B0A83 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB284A8218FD2B8006B0A83 /* main.swift */; };
 		7DC48C9521A1E73700ED17B6 /* valueIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC48C9421A1E73700ED17B6 /* valueIterator.swift */; };
 		7DC48C9621A1E73700ED17B6 /* valueIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC48C9421A1E73700ED17B6 /* valueIterator.swift */; };
+		7DC48C9921A46C0A00ED17B6 /* GridWorldSmallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC48C9821A46C0A00ED17B6 /* GridWorldSmallTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -92,6 +93,7 @@
 		7DB284A8218FD2B8006B0A83 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		7DC48C9421A1E73700ED17B6 /* valueIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = valueIterator.swift; sourceTree = "<group>"; };
 		7DC48C9721A1F49500ED17B6 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		7DC48C9821A46C0A00ED17B6 /* GridWorldSmallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridWorldSmallTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			children = (
 				7D6A55962198A87500C6BE35 /* GridWorldTests.swift */,
 				7D6A55B321A0FB4000C6BE35 /* GridWorldWithMovementCostTests.swift */,
+				7DC48C9821A46C0A00ED17B6 /* GridWorldSmallTests.swift */,
 				7D6A55702192D31E00C6BE35 /* MarkovTests.swift */,
 				7D6A55722192D31E00C6BE35 /* Info.plist */,
 			);
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DC48C9921A46C0A00ED17B6 /* GridWorldSmallTests.swift in Sources */,
 				7D6A5586219330DA00C6BE35 /* MarkovTests.swift in Sources */,
 				7D6A55802193309F00C6BE35 /* main.swift in Sources */,
 				7D6A55812193309F00C6BE35 /* distribution.swift in Sources */,

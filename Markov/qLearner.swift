@@ -33,7 +33,7 @@ class QLearner<T: Environment> {
             if let action = policy.getAction(forState: environment.currentState) {
                 let state = environment.currentState
                 let (nextState, reward) = environment.select(action: action)
-                let current = getEstimate(forState: environment.currentState, action: action)
+                let current = getEstimate(forState: state, action: action)
                 let nextActions = environment.getActions(forState: nextState)
                 let next = nextActions?.map({ getEstimate(forState: nextState, action: $0) }).max() ?? 0.0
                 let backup = current + stepSize * (reward + discount * next - current)

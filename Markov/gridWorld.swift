@@ -11,7 +11,7 @@ struct GridSquare: Equatable, Hashable {
     let y: Int
 }
 
-enum GridAction { case up, down, left, right }
+enum GridAction { case up, down, left, right, engageClaw }
 
 class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
     typealias Action = GridAction
@@ -56,9 +56,17 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
         transitions[from] = moves
     }
     
-    func addVortex(at: GridSquare, withReward reward: Reward) {
+    func addGoal(at: GridSquare, withReward reward: Reward) {
         updateAllRewards(forState: at, withReward: reward)
         transitions[at] = nil
+    }
+    
+    func addStochasticReward(_ reward: Reward, atGridSquare gs: GridSquare, forAction action: GridAction, withProbability p: Double, withCost cost: Reward) {
+        assert(p > 0.0 && p < 1.0)
+        let distribution = WeightedDistribution(weightedEvents: [(Transition(state: gs, reward: reward), p), (Transition(state: gs, reward: cost), 1.0 - p)])
+        var moves = transitions[gs] ?? Dictionary()
+        moves[action] = distribution
+        transitions[gs] = moves
     }
     
     private static func createMove(forGridSquare gs: GridSquare,
@@ -66,7 +74,7 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
                                    rowCount: Int,
                                    columnCount: Int,
                                    movementCost: Double,
-                                   wallPenalty: Double) -> WeightedDistribution<Transition<State>> {
+                                   wallPenalty: Double) -> WeightedDistribution<Transition<State>>? {
         var transition: Transition<State>
         switch action {
         case GridAction.up:
@@ -97,6 +105,8 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
             else {
                 transition = Transition(state: GridSquare(x: gs.x + 1, y: gs.y), reward: movementCost)
             }
+        case GridAction.engageClaw:
+            return nil
         }
         return WeightedDistribution(weightedEvents: [(transition, 1.0)])
     }
