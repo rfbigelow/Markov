@@ -35,6 +35,12 @@ class GridWorldSmallTests: XCTestCase {
         
         let policy = PolicyIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
         playGridWorld(gridWorld: gridWorld, withPolicy: policy, currentState: &currentState, score: &score, plays: 100)
+
+        //print(createGrid(mdp: gridWorld, policy: policy))
+
+        let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
+        policyEvaluator.evaluate(policy: policy)
+        print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
     }
 
     func testStochasticRewardWithValueIteration() {
@@ -48,6 +54,11 @@ class GridWorldSmallTests: XCTestCase {
         
         let policy = ValueIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
         playGridWorld(gridWorld: gridWorld, withPolicy: policy, currentState: &currentState, score: &score, plays: 100)
+        
+//        print(createGrid(mdp: gridWorld, policy: policy))
+        let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
+        policyEvaluator.evaluate(policy: policy)
+        print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
     }
 
     func testStochasticRewardWithQLearning() {
@@ -76,5 +87,9 @@ class GridWorldSmallTests: XCTestCase {
             epsilon: 0.0)
         
         playGridWorld(gridWorld: gridWorld, withPolicy: greedyPolicy, currentState: &currentState, score: &score, plays: 100)
+//        print(createGrid(mdp: gridWorld, policy: greedyPolicy))
+        let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
+        policyEvaluator.evaluate(policy: greedyPolicy)
+        print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
     }
 }

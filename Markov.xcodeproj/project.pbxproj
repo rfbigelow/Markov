@@ -51,6 +51,8 @@
 		7DC48C9521A1E73700ED17B6 /* valueIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC48C9421A1E73700ED17B6 /* valueIterator.swift */; };
 		7DC48C9621A1E73700ED17B6 /* valueIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC48C9421A1E73700ED17B6 /* valueIterator.swift */; };
 		7DC48C9921A46C0A00ED17B6 /* GridWorldSmallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC48C9821A46C0A00ED17B6 /* GridWorldSmallTests.swift */; };
+		7DC48C9B21A515D000ED17B6 /* mathematica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC48C9A21A515D000ED17B6 /* mathematica.swift */; };
+		7DC48C9C21A515D000ED17B6 /* mathematica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC48C9A21A515D000ED17B6 /* mathematica.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -94,6 +96,7 @@
 		7DC48C9421A1E73700ED17B6 /* valueIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = valueIterator.swift; sourceTree = "<group>"; };
 		7DC48C9721A1F49500ED17B6 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		7DC48C9821A46C0A00ED17B6 /* GridWorldSmallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridWorldSmallTests.swift; sourceTree = "<group>"; };
+		7DC48C9A21A515D000ED17B6 /* mathematica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mathematica.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,7 @@
 				7D6A55AD219E63E500C6BE35 /* distributionEstimator.swift */,
 				7D6A55B0219F23B500C6BE35 /* qLearner.swift */,
 				7DC48C9421A1E73700ED17B6 /* valueIterator.swift */,
+				7DC48C9A21A515D000ED17B6 /* mathematica.swift */,
 			);
 			path = Markov;
 			sourceTree = "<group>";
@@ -264,6 +268,7 @@
 				7D6A5586219330DA00C6BE35 /* MarkovTests.swift in Sources */,
 				7D6A55802193309F00C6BE35 /* main.swift in Sources */,
 				7D6A55812193309F00C6BE35 /* distribution.swift in Sources */,
+				7DC48C9C21A515D000ED17B6 /* mathematica.swift in Sources */,
 				7D6A559A2198F8C000C6BE35 /* policyEvaluator.swift in Sources */,
 				7D6A55822193309F00C6BE35 /* environment.swift in Sources */,
 				7D6A55832193309F00C6BE35 /* markovDecisionProcess.swift in Sources */,
@@ -304,6 +309,7 @@
 				7D6A55892195F57A00C6BE35 /* mdpEnvironment.swift in Sources */,
 				7D6A557E21932F8B00C6BE35 /* environment.swift in Sources */,
 				7D6A55902196430400C6BE35 /* policy.swift in Sources */,
+				7DC48C9B21A515D000ED17B6 /* mathematica.swift in Sources */,
 				7D6A55932197F0AB00C6BE35 /* gridWorld.swift in Sources */,
 				7D6A55A5219A22C200C6BE35 /* binDistribution.swift in Sources */,
 				7D6A55A2219A1D2900C6BE35 /* policyIterator.swift in Sources */,

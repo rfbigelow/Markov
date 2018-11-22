@@ -6,6 +6,8 @@
 //  Copyright © 2018 Robert Bigelow. All rights reserved.
 //
 
+/// A value iterator finds an optimal policy by incrementally building an estimate of the
+/// state-value function V(s) by using the action-value function Q(s, a).
 class ValueIterator<TModel: MarkovDecisionProcess> {
     
     let mdp: TModel
@@ -47,6 +49,7 @@ class ValueIterator<TModel: MarkovDecisionProcess> {
         return StochasticPolicy<TModel>(actionMap: chosenActions)
     }
     
+    /// Finds an optimal policy by using value iteration.
     static func getOptimalPolicy(forModel mdp:TModel, withTolerance epsilon: Double, withDiscount gamma: Double) -> StochasticPolicy<TModel> {
         let valueIterator = ValueIterator(mdp: mdp, gamma: gamma)
         return valueIterator.getPolicy(withTolerance: epsilon)
