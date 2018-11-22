@@ -27,8 +27,9 @@ class QLearner<T: Environment> {
     /// Updates the estimated values by using the Q-learning algorithm.
     func learn(withPolicy policy: EpsilonGreedyPolicy<T.State, T.Action>,
                fromState initialState: T.State,
-               forSteps steps: Int) {
+               forSteps steps: Int) -> Int {
         environment.reset(initialState: initialState)
+        var stepsTaken = 0
         for _ in 0..<steps {
             if let action = policy.getAction(forState: environment.currentState) {
                 let state = environment.currentState
@@ -42,7 +43,9 @@ class QLearner<T: Environment> {
             else {
                 break
             }
+            stepsTaken += 1
         }
+        return stepsTaken
     }
     
     /// Gets the current estimate for the given state/action pair.

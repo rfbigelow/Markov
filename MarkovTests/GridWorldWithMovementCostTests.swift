@@ -9,6 +9,8 @@
 import XCTest
 
 class GridWorldWithMovementCostTests: XCTestCase {
+    private let outputPolicy = false
+    private let outputStateValues = false
     
     var gridWorld: GridWorld!
     var score = 0.0
@@ -29,21 +31,32 @@ class GridWorldWithMovementCostTests: XCTestCase {
         let optimal = PolicyIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
         playGridWorld(gridWorld: gridWorld, withPolicy: optimal, currentState: &currentState, score: &score, plays: 100)
         XCTAssert(score == -47.0)
-//        print(createGrid(mdp: gridWorld, policy: optimal))
-        let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
-        policyEvaluator.evaluate(policy: optimal)
-        print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
-
+        
+        if outputPolicy {
+            print(createGrid(mdp: gridWorld, policy: optimal))
+        }
+        
+        if outputStateValues {
+            let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
+            policyEvaluator.evaluate(policy: optimal)
+            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+        }
     }
     
     func testValueIteration() {
         let optimal = ValueIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.90)
         playGridWorld(gridWorld: gridWorld, withPolicy: optimal, currentState: &currentState, score: &score, plays: 100)
         XCTAssert(score == -47.0)
-//        print(createGrid(mdp: gridWorld, policy: optimal))
-        let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
-        policyEvaluator.evaluate(policy: optimal)
-        print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+        
+        if outputPolicy {
+            print(createGrid(mdp: gridWorld, policy: optimal))
+        }
+        
+        if outputStateValues {
+            let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
+            policyEvaluator.evaluate(policy: optimal)
+            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+        }
     }
     
     func testQLearner() {
@@ -54,9 +67,11 @@ class GridWorldWithMovementCostTests: XCTestCase {
             actionValueDelegate: { learner.getEstimate(forState: $0, action: $1) },
             epsilon: 0.1)
         
+        var steps = 0
         for _ in 0..<15000 {
-            learner.learn(withPolicy: policy, fromState: GridSquare(x: 0, y: 0), forSteps: 100)
+            steps += learner.learn(withPolicy: policy, fromState: GridSquare(x: 0, y: 0), forSteps: 100)
         }
+        print("Q-Learner took \(steps) steps.")
         
         let greedy = EpsilonGreedyPolicy(
             actionsForStateDelegate: { environment.getActions(forState: $0) },
@@ -64,10 +79,16 @@ class GridWorldWithMovementCostTests: XCTestCase {
             epsilon: 0.0)
         playGridWorld(gridWorld: gridWorld, withPolicy: greedy, currentState: &currentState, score: &score, plays: 100)
         XCTAssert(currentState == GridSquare(x: 24, y: 24))
-//        print(createGrid(mdp: gridWorld, policy: greedy))
-        let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
-        policyEvaluator.evaluate(policy: greedy)
-        print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+
+        if outputPolicy {
+            print(createGrid(mdp: gridWorld, policy: greedy))
+        }
+        
+        if outputStateValues {
+            let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
+            policyEvaluator.evaluate(policy: greedy)
+            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+        }
     }
 
 }
