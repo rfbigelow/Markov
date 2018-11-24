@@ -9,8 +9,8 @@
 import XCTest
 
 class GridWorldSmallTests: XCTestCase {
-    private let outputPolicy = false
-    private let outputStateValues = false
+    private let outputPolicy = true
+    private let outputStateValues = true
 
     var gridWorld: GridWorld!
     var score = 0.0
@@ -39,13 +39,13 @@ class GridWorldSmallTests: XCTestCase {
         playGridWorld(gridWorld: gridWorld, withPolicy: policy, currentState: &currentState, score: &score, plays: 100)
 
         if outputPolicy {
-            print(createGrid(mdp: gridWorld, policy: policy))
+            addAttachment(string: createGrid(mdp: gridWorld, policy: policy))
         }
 
         if outputStateValues {
             let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
             policyEvaluator.evaluate(policy: policy)
-            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+            addAttachment(string: createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
         }
     }
 
@@ -62,13 +62,13 @@ class GridWorldSmallTests: XCTestCase {
         playGridWorld(gridWorld: gridWorld, withPolicy: policy, currentState: &currentState, score: &score, plays: 100)
         
         if outputPolicy {
-            print(createGrid(mdp: gridWorld, policy: policy))
+            addAttachment(string: createGrid(mdp: gridWorld, policy: policy))
         }
         
         if outputStateValues {
             let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
             policyEvaluator.evaluate(policy: policy)
-            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+            addAttachment(string: createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
         }
     }
 
@@ -102,13 +102,13 @@ class GridWorldSmallTests: XCTestCase {
         playGridWorld(gridWorld: gridWorld, withPolicy: greedyPolicy, currentState: &currentState, score: &score, plays: 100)
        
         if outputPolicy {
-            print(createGrid(mdp: gridWorld, policy: greedyPolicy))
+            addAttachment(string: createGrid(mdp: gridWorld, policy: greedyPolicy))
         }
         
         if outputStateValues {
             let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
             policyEvaluator.evaluate(policy: greedyPolicy)
-            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+            addAttachment(string: createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
         }
     }
 
@@ -142,13 +142,13 @@ class GridWorldSmallTests: XCTestCase {
         playGridWorld(gridWorld: gridWorld, withPolicy: greedyPolicy, currentState: &currentState, score: &score, plays: 100)
         
         if outputPolicy {
-            print(createGrid(mdp: gridWorld, policy: greedyPolicy))
+            addAttachment(string: createGrid(mdp: gridWorld, policy: greedyPolicy))
         }
         
         if outputStateValues {
             let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
             policyEvaluator.evaluate(policy: greedyPolicy)
-            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+            addAttachment(string: createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
         }
     }
 }

@@ -14,6 +14,7 @@
 		7D667B5021A893B000A0AF09 /* decayingStepFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D667B4E21A893B000A0AF09 /* decayingStepFunction.swift */; };
 		7D667B5521A89A1400A0AF09 /* constantStepFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D667B5421A89A1400A0AF09 /* constantStepFunction.swift */; };
 		7D667B5621A89A1400A0AF09 /* constantStepFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D667B5421A89A1400A0AF09 /* constantStepFunction.swift */; };
+		7D667B5821A9CE8300A0AF09 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D667B5721A9CE8300A0AF09 /* Extensions.swift */; };
 		7D6A557B21932F8B00C6BE35 /* markovDecisionProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02B21929509003B3895 /* markovDecisionProcess.swift */; };
 		7D6A557C21932F8B00C6BE35 /* weightedDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02F219295BC003B3895 /* weightedDistribution.swift */; };
 		7D6A557D21932F8B00C6BE35 /* tableDrivenMDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E03121929601003B3895 /* tableDrivenMDP.swift */; };
@@ -77,6 +78,7 @@
 		7D667B4B21A892CA00A0AF09 /* stepFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stepFunction.swift; sourceTree = "<group>"; };
 		7D667B4E21A893B000A0AF09 /* decayingStepFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = decayingStepFunction.swift; sourceTree = "<group>"; };
 		7D667B5421A89A1400A0AF09 /* constantStepFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constantStepFunction.swift; sourceTree = "<group>"; };
+		7D667B5721A9CE8300A0AF09 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7D6A556E2192D31E00C6BE35 /* MarkovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarkovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6A55702192D31E00C6BE35 /* MarkovTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkovTests.swift; sourceTree = "<group>"; };
 		7D6A55722192D31E00C6BE35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				7DC48C9821A46C0A00ED17B6 /* GridWorldSmallTests.swift */,
 				7D6A55702192D31E00C6BE35 /* MarkovTests.swift */,
 				7D6A55722192D31E00C6BE35 /* Info.plist */,
+				7D667B5721A9CE8300A0AF09 /* Extensions.swift */,
 			);
 			path = MarkovTests;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				7D6A55AC219D1B3D00C6BE35 /* epsilonGreedyPolicy.swift in Sources */,
 				7D6A55912196430400C6BE35 /* policy.swift in Sources */,
 				7D6A55AF219E63E500C6BE35 /* distributionEstimator.swift in Sources */,
+				7D667B5821A9CE8300A0AF09 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

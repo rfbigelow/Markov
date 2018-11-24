@@ -33,13 +33,13 @@ class GridWorldWithMovementCostTests: XCTestCase {
         XCTAssert(score == -47.0)
         
         if outputPolicy {
-            print(createGrid(mdp: gridWorld, policy: optimal))
+            addAttachment(string: createGrid(mdp: gridWorld, policy: optimal))
         }
         
         if outputStateValues {
             let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
             policyEvaluator.evaluate(policy: optimal)
-            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+            addAttachment(string: createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
         }
     }
     
@@ -49,13 +49,13 @@ class GridWorldWithMovementCostTests: XCTestCase {
         XCTAssert(score == -47.0)
         
         if outputPolicy {
-            print(createGrid(mdp: gridWorld, policy: optimal))
+            addAttachment(string: createGrid(mdp: gridWorld, policy: optimal))
         }
         
         if outputStateValues {
             let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
             policyEvaluator.evaluate(policy: optimal)
-            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+            addAttachment(string: createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
         }
     }
     
@@ -82,13 +82,13 @@ class GridWorldWithMovementCostTests: XCTestCase {
         XCTAssert(currentState == GridSquare(x: 24, y: 24))
 
         if outputPolicy {
-            print(createGrid(mdp: gridWorld, policy: greedy))
+            addAttachment(string: createGrid(mdp: gridWorld, policy: greedy))
         }
         
         if outputStateValues {
             let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
             policyEvaluator.evaluate(policy: greedy)
-            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+            addAttachment(string: createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
         }
     }
 
@@ -114,13 +114,13 @@ class GridWorldWithMovementCostTests: XCTestCase {
         XCTAssert(currentState == GridSquare(x: 24, y: 24))
         
         if outputPolicy {
-            print(createGrid(mdp: gridWorld, policy: greedy))
+            addAttachment(string: createGrid(mdp: gridWorld, policy: greedy))
         }
         
         if outputStateValues {
             let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
             policyEvaluator.evaluate(policy: greedy)
-            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+            addAttachment(string: createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
         }
     }
 }
