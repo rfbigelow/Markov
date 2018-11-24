@@ -111,4 +111,5 @@ The framework defines the following protocols in order to lay out the Reinforcem
 ## References
 
 [1] R. S.  Sutton and A. G. Barto, *Reinforcement Learning: an introduction, 2nd ed.* Cambridge, MA: The MIT Press, 2018 
+
 [2] T. Mitchell, *Machine Learning* McGraw-Hill, 1997
