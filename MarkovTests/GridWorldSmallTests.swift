@@ -72,7 +72,7 @@ class GridWorldSmallTests: XCTestCase {
         }
     }
 
-    func testStochasticRewardWithQLearning() {
+    func testStochasticRewardWithQLearningConstantStep() {
         gridWorld.addGoal(at: GridSquare(x: 4, y: 4), withReward: 0.0)
         gridWorld.addStochasticReward(5.0, atGridSquare: GridSquare(x: 2, y: 2), forAction: GridAction.engageClaw, withProbability: 0.2, withCost: -1.0)
         gridWorld.addStochasticReward(100.0, atGridSquare: GridSquare(x: 0, y: 4), forAction: GridAction.engageClaw, withProbability: 0.01, withCost: -1.0)
@@ -82,7 +82,7 @@ class GridWorldSmallTests: XCTestCase {
         XCTAssertNotNil(transitions)
         
         let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
-        let learner = QLearner(environment: environment, discount: 0.99, stepSize: 0.01)
+        let learner = QLearner(environment: environment, discount: 0.99, stepFunc: ConstantStepFunction(stepSize: 0.1))
         let policy = EpsilonGreedyPolicy(
             actionsForStateDelegate: { environment.getActions(forState: $0)},
             actionValueDelegate: { learner.getEstimate(forState: $0, action: $1)},
@@ -101,6 +101,46 @@ class GridWorldSmallTests: XCTestCase {
         
         playGridWorld(gridWorld: gridWorld, withPolicy: greedyPolicy, currentState: &currentState, score: &score, plays: 100)
        
+        if outputPolicy {
+            print(createGrid(mdp: gridWorld, policy: greedyPolicy))
+        }
+        
+        if outputStateValues {
+            let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
+            policyEvaluator.evaluate(policy: greedyPolicy)
+            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+        }
+    }
+
+    func testStochasticRewardWithQLearningDecayingStep() {
+        gridWorld.addGoal(at: GridSquare(x: 4, y: 4), withReward: 0.0)
+        gridWorld.addStochasticReward(5.0, atGridSquare: GridSquare(x: 2, y: 2), forAction: GridAction.engageClaw, withProbability: 0.2, withCost: -1.0)
+        gridWorld.addStochasticReward(100.0, atGridSquare: GridSquare(x: 0, y: 4), forAction: GridAction.engageClaw, withProbability: 0.01, withCost: -1.0)
+        gridWorld.addStochasticReward(1000.0, atGridSquare: GridSquare(x: 4, y: 0), forAction: GridAction.engageClaw, withProbability: 0.005, withCost: -1.0)
+        
+        let transitions = gridWorld.getTransitions(fromState: GridSquare(x: 2, y: 2), forTakingAction: GridAction.engageClaw)
+        XCTAssertNotNil(transitions)
+        
+        let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
+        let learner = QLearner(environment: environment, discount: 0.99, stepFunc: DecayingStepFunction())
+        let policy = EpsilonGreedyPolicy(
+            actionsForStateDelegate: { environment.getActions(forState: $0)},
+            actionValueDelegate: { learner.getEstimate(forState: $0, action: $1)},
+            epsilon: 0.25)
+        
+        var steps = 0
+        for _ in 0..<100 {
+            steps += learner.learnBackwards(withPolicy: policy, fromState: GridSquare(x: 0, y: 0), forSteps: 100)
+        }
+        print("Q-learner took \(steps) steps.")
+        
+        let greedyPolicy = EpsilonGreedyPolicy(
+            actionsForStateDelegate: { environment.getActions(forState: $0)},
+            actionValueDelegate: { learner.getEstimate(forState: $0, action: $1)},
+            epsilon: 0.0)
+        
+        playGridWorld(gridWorld: gridWorld, withPolicy: greedyPolicy, currentState: &currentState, score: &score, plays: 100)
+        
         if outputPolicy {
             print(createGrid(mdp: gridWorld, policy: greedyPolicy))
         }

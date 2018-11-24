@@ -9,8 +9,8 @@
 import XCTest
 
 class GridWorldWithMovementCostTests: XCTestCase {
-    private let outputPolicy = false
-    private let outputStateValues = false
+    private let outputPolicy = true
+    private let outputStateValues = true
     
     var gridWorld: GridWorld!
     var score = 0.0
@@ -59,17 +59,18 @@ class GridWorldWithMovementCostTests: XCTestCase {
         }
     }
     
-    func testQLearner() {
+    func testQLearnerDecayingStep() {
         let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
-        let learner = QLearner(environment: environment, discount: 0.9, stepSize: 0.1)
+        let learner = QLearner(environment: environment, discount: 0.8, stepFunc: DecayingStepFunction(min: 0.1))
         let policy = EpsilonGreedyPolicy(
             actionsForStateDelegate: { environment.getActions(forState: $0) },
             actionValueDelegate: { learner.getEstimate(forState: $0, action: $1) },
             epsilon: 0.1)
         
         var steps = 0
-        for _ in 0..<15000 {
-            steps += learner.learn(withPolicy: policy, fromState: GridSquare(x: 0, y: 0), forSteps: 100)
+        for _ in 0..<10000 {
+            let initialState = GridSquare(x: 0, y: 0)
+            steps += learner.learnBackwards(withPolicy: policy, fromState: initialState, forSteps: 100000)
         }
         print("Q-Learner took \(steps) steps.")
         
@@ -91,4 +92,35 @@ class GridWorldWithMovementCostTests: XCTestCase {
         }
     }
 
+    func testQLearnerConstantStep() {
+        let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
+        let learner = QLearner(environment: environment, discount: 0.8, stepFunc: ConstantStepFunction(stepSize: 0.1))
+        let policy = EpsilonGreedyPolicy(
+            actionsForStateDelegate: { environment.getActions(forState: $0) },
+            actionValueDelegate: { learner.getEstimate(forState: $0, action: $1) },
+            epsilon: 0.1)
+        
+        var steps = 0
+        for _ in 0..<10000 {
+            steps += learner.learnBackwards(withPolicy: policy, fromState: GridSquare(x: 0, y: 0), forSteps: 100000)
+        }
+        print("Q-Learner took \(steps) steps.")
+        
+        let greedy = EpsilonGreedyPolicy(
+            actionsForStateDelegate: { environment.getActions(forState: $0) },
+            actionValueDelegate: { learner.getEstimate(forState: $0, action: $1) },
+            epsilon: 0.0)
+        playGridWorld(gridWorld: gridWorld, withPolicy: greedy, currentState: &currentState, score: &score, plays: 100)
+        XCTAssert(currentState == GridSquare(x: 24, y: 24))
+        
+        if outputPolicy {
+            print(createGrid(mdp: gridWorld, policy: greedy))
+        }
+        
+        if outputStateValues {
+            let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
+            policyEvaluator.evaluate(policy: greedy)
+            print(createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
+        }
+    }
 }

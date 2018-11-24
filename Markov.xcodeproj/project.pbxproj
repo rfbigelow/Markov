@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		7D43F4F921A117D100ECA2FC /* GridWorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A55962198A87500C6BE35 /* GridWorldTests.swift */; };
+		7D667B4C21A892CA00A0AF09 /* stepFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D667B4B21A892CA00A0AF09 /* stepFunction.swift */; };
+		7D667B4D21A892CA00A0AF09 /* stepFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D667B4B21A892CA00A0AF09 /* stepFunction.swift */; };
+		7D667B4F21A893B000A0AF09 /* decayingStepFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D667B4E21A893B000A0AF09 /* decayingStepFunction.swift */; };
+		7D667B5021A893B000A0AF09 /* decayingStepFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D667B4E21A893B000A0AF09 /* decayingStepFunction.swift */; };
+		7D667B5521A89A1400A0AF09 /* constantStepFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D667B5421A89A1400A0AF09 /* constantStepFunction.swift */; };
+		7D667B5621A89A1400A0AF09 /* constantStepFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D667B5421A89A1400A0AF09 /* constantStepFunction.swift */; };
 		7D6A557B21932F8B00C6BE35 /* markovDecisionProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02B21929509003B3895 /* markovDecisionProcess.swift */; };
 		7D6A557C21932F8B00C6BE35 /* weightedDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E02F219295BC003B3895 /* weightedDistribution.swift */; };
 		7D6A557D21932F8B00C6BE35 /* tableDrivenMDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79E03121929601003B3895 /* tableDrivenMDP.swift */; };
@@ -68,6 +74,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7D667B4B21A892CA00A0AF09 /* stepFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stepFunction.swift; sourceTree = "<group>"; };
+		7D667B4E21A893B000A0AF09 /* decayingStepFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = decayingStepFunction.swift; sourceTree = "<group>"; };
+		7D667B5421A89A1400A0AF09 /* constantStepFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constantStepFunction.swift; sourceTree = "<group>"; };
 		7D6A556E2192D31E00C6BE35 /* MarkovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarkovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6A55702192D31E00C6BE35 /* MarkovTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkovTests.swift; sourceTree = "<group>"; };
 		7D6A55722192D31E00C6BE35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -157,6 +166,7 @@
 				7D79E029219294C6003B3895 /* environment.swift */,
 				7D6A558F2196430400C6BE35 /* policy.swift */,
 				7D6A55882195F57A00C6BE35 /* mdpEnvironment.swift */,
+				7D667B4B21A892CA00A0AF09 /* stepFunction.swift */,
 				7D79E02F219295BC003B3895 /* weightedDistribution.swift */,
 				7D79E03121929601003B3895 /* tableDrivenMDP.swift */,
 				7DB284A8218FD2B8006B0A83 /* main.swift */,
@@ -172,6 +182,8 @@
 				7D6A55B0219F23B500C6BE35 /* qLearner.swift */,
 				7DC48C9421A1E73700ED17B6 /* valueIterator.swift */,
 				7DC48C9A21A515D000ED17B6 /* mathematica.swift */,
+				7D667B4E21A893B000A0AF09 /* decayingStepFunction.swift */,
+				7D667B5421A89A1400A0AF09 /* constantStepFunction.swift */,
 			);
 			path = Markov;
 			sourceTree = "<group>";
@@ -269,9 +281,11 @@
 				7D6A55802193309F00C6BE35 /* main.swift in Sources */,
 				7D6A55812193309F00C6BE35 /* distribution.swift in Sources */,
 				7DC48C9C21A515D000ED17B6 /* mathematica.swift in Sources */,
+				7D667B5021A893B000A0AF09 /* decayingStepFunction.swift in Sources */,
 				7D6A559A2198F8C000C6BE35 /* policyEvaluator.swift in Sources */,
 				7D6A55822193309F00C6BE35 /* environment.swift in Sources */,
 				7D6A55832193309F00C6BE35 /* markovDecisionProcess.swift in Sources */,
+				7D667B5621A89A1400A0AF09 /* constantStepFunction.swift in Sources */,
 				7D6A55A3219A1D2900C6BE35 /* policyIterator.swift in Sources */,
 				7D6A558A219602BA00C6BE35 /* mdpEnvironment.swift in Sources */,
 				7D6A55842193309F00C6BE35 /* weightedDistribution.swift in Sources */,
@@ -279,6 +293,7 @@
 				7D6A55A6219A22C200C6BE35 /* binDistribution.swift in Sources */,
 				7D6A55852193309F00C6BE35 /* tableDrivenMDP.swift in Sources */,
 				7D6A55B521A0FB4000C6BE35 /* GridWorldWithMovementCostTests.swift in Sources */,
+				7D667B4D21A892CA00A0AF09 /* stepFunction.swift in Sources */,
 				7D6A55A02199DC1700C6BE35 /* valueFunctions.swift in Sources */,
 				7D6A559D21991EEB00C6BE35 /* randomSelectPolicy.swift in Sources */,
 				7D6A55942197F0AB00C6BE35 /* gridWorld.swift in Sources */,
@@ -295,11 +310,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D667B5521A89A1400A0AF09 /* constantStepFunction.swift in Sources */,
 				7D43F4F921A117D100ECA2FC /* GridWorldTests.swift in Sources */,
 				7D6A557D21932F8B00C6BE35 /* tableDrivenMDP.swift in Sources */,
 				7D6A559F2199DC1700C6BE35 /* valueFunctions.swift in Sources */,
+				7D667B4F21A893B000A0AF09 /* decayingStepFunction.swift in Sources */,
 				7D6A559C21991EEB00C6BE35 /* randomSelectPolicy.swift in Sources */,
 				7D6A557C21932F8B00C6BE35 /* weightedDistribution.swift in Sources */,
+				7D667B4C21A892CA00A0AF09 /* stepFunction.swift in Sources */,
 				7D6A55AE219E63E500C6BE35 /* distributionEstimator.swift in Sources */,
 				7DB284A9218FD2B8006B0A83 /* main.swift in Sources */,
 				7D6A55A8219A300200C6BE35 /* stochasticPolicy.swift in Sources */,
