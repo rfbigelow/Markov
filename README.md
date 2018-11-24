@@ -96,7 +96,7 @@ The framework defines the following protocols in order to lay out the Reinforcem
 
 ### Q-Learning
 
-* `QLearner`    Implements *q learning*, which is an off-policy reinforcement learning technique.
+* `QLearner`    Implements *q learning*, which is an off-policy reinforcement learning technique. Supports a "backwards" learning mode that updates the estimates at the end of the episode by capturing all transitions and then using them in reverse. This allows all updates to be based on estimates from the current episode. This can improve convergence [2].
 
 * `DecayingStepFunction` A step function that decays as more values are seen for each state/action pair. Can be configured to cap the decay at a minimum step size.
 
@@ -111,3 +111,4 @@ The framework defines the following protocols in order to lay out the Reinforcem
 ## References
 
 [1] R. S.  Sutton and A. G. Barto, *Reinforcement Learning: an introduction, 2nd ed.* Cambridge, MA: The MIT Press, 2018 
+[2] T. Mitchell, *Machine Learning* McGraw-Hill, 1997
