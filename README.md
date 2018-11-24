@@ -54,6 +54,8 @@ The framework defines the following protocols in order to lay out the Reinforcem
 
 * `Policy`  A policy represents a plan or strategy that an agent will follow...when in this state, perform this action...in order to maximize long-term gains. Policies are probabilistic. Rather than give a single action, they return the probability of taking an action from the given state.
 
+* `StepFunction` Function that controls the step size during Q-Learning.
+
 ## Structs
 
 ### Distributions
@@ -71,6 +73,10 @@ The framework defines the following protocols in order to lay out the Reinforcem
 * `StochasticPolicy`    A policy that randomly selects from one of a distribution of equally probable actions. This differs from the `RandomSelectPolicy` in that the distributions are configurable, and it does not require a `MarkovDecisionProcess` to provide the available actions. This is used by the `PolicyImprover` to track more than one "best" action for any given situation, which allows for more exploration of the state space when using the policy.
 
 * `EpsilonGreedyPolicy` A policy that chooses the best possible action for a given state most of the time, but occassionally (with probability `epsilon`) selects a random action. This is used to tune the exploit/explore qualities of a reinforcement learning algorithm. If `epsilon` is `0.0` then this will act as a greedy policy.
+
+### Q-Learning
+
+* `ConstantStepFunction` A step function that maintains a constant step size over all episodes.
 
 ## Classes
 
@@ -91,6 +97,8 @@ The framework defines the following protocols in order to lay out the Reinforcem
 ### Q-Learning
 
 * `QLearner`    Implements *q learning*, which is an off-policy reinforcement learning technique.
+
+* `DecayingStepFunction` A step function that decays as more values are seen for each state/action pair. Can be configured to cap the decay at a minimum step size.
 
 ## Functions
 
