@@ -28,15 +28,15 @@ class GridWorldSmallTests: XCTestCase {
     
     func testStochasticRewardWithPolicyIteration() {
         gridWorld.addGoal(at: GridSquare(x: 4, y: 4), withReward: 0.0)
-        gridWorld.addStochasticReward(5.0, atGridSquare: GridSquare(x: 2, y: 2), forAction: GridAction.engageClaw, withProbability: 0.2, withCost: -1.0)
-        gridWorld.addStochasticReward(100.0, atGridSquare: GridSquare(x: 0, y: 4), forAction: GridAction.engageClaw, withProbability: 0.01, withCost: -1.0)
-        gridWorld.addStochasticReward(1000.0, atGridSquare: GridSquare(x: 4, y: 0), forAction: GridAction.engageClaw, withProbability: 0.005, withCost: -1.0)
+        gridWorld.addStochasticReward(5.0, atGridSquare: GridSquare(x: 2, y: 2), forAction: GridAction.dig, withProbability: 0.2, withCost: -1.0)
+        gridWorld.addStochasticReward(100.0, atGridSquare: GridSquare(x: 0, y: 4), forAction: GridAction.dig, withProbability: 0.01, withCost: -1.0)
+        gridWorld.addStochasticReward(1000.0, atGridSquare: GridSquare(x: 4, y: 0), forAction: GridAction.dig, withProbability: 0.005, withCost: -1.0)
         
-        let transitions = gridWorld.getTransitions(fromState: GridSquare(x: 2, y: 2), forTakingAction: GridAction.engageClaw)
+        let transitions = gridWorld.getTransitions(fromState: GridSquare(x: 2, y: 2), forTakingAction: GridAction.dig)
         XCTAssertNotNil(transitions)
         
-        let policy = PolicyIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
-        playGridWorld(gridWorld: gridWorld, withPolicy: policy, currentState: &currentState, score: &score, plays: 100)
+        let (policy, _, _) = PolicyIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: policy, currentState: &currentState, score: &score, plays: 100))
 
         if outputPolicy {
             addAttachment(string: createGrid(mdp: gridWorld, policy: policy))
@@ -51,15 +51,15 @@ class GridWorldSmallTests: XCTestCase {
 
     func testStochasticRewardWithValueIteration() {
         gridWorld.addGoal(at: GridSquare(x: 4, y: 4), withReward: 0.0)
-        gridWorld.addStochasticReward(5.0, atGridSquare: GridSquare(x: 2, y: 2), forAction: GridAction.engageClaw, withProbability: 0.2, withCost: -1.0)
-        gridWorld.addStochasticReward(100.0, atGridSquare: GridSquare(x: 0, y: 4), forAction: GridAction.engageClaw, withProbability: 0.01, withCost: -1.0)
-        gridWorld.addStochasticReward(1000.0, atGridSquare: GridSquare(x: 4, y: 0), forAction: GridAction.engageClaw, withProbability: 0.005, withCost: -1.0)
+        gridWorld.addStochasticReward(5.0, atGridSquare: GridSquare(x: 2, y: 2), forAction: GridAction.dig, withProbability: 0.2, withCost: -1.0)
+        gridWorld.addStochasticReward(100.0, atGridSquare: GridSquare(x: 0, y: 4), forAction: GridAction.dig, withProbability: 0.01, withCost: -1.0)
+        gridWorld.addStochasticReward(1000.0, atGridSquare: GridSquare(x: 4, y: 0), forAction: GridAction.dig, withProbability: 0.005, withCost: -1.0)
 
-        let transitions = gridWorld.getTransitions(fromState: GridSquare(x: 2, y: 2), forTakingAction: GridAction.engageClaw)
+        let transitions = gridWorld.getTransitions(fromState: GridSquare(x: 2, y: 2), forTakingAction: GridAction.dig)
         XCTAssertNotNil(transitions)
         
-        let policy = ValueIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
-        playGridWorld(gridWorld: gridWorld, withPolicy: policy, currentState: &currentState, score: &score, plays: 100)
+        let (policy, _) = ValueIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: policy, currentState: &currentState, score: &score, plays: 100))
         
         if outputPolicy {
             addAttachment(string: createGrid(mdp: gridWorld, policy: policy))
@@ -74,11 +74,11 @@ class GridWorldSmallTests: XCTestCase {
 
     func testStochasticRewardWithQLearningConstantStep() {
         gridWorld.addGoal(at: GridSquare(x: 4, y: 4), withReward: 0.0)
-        gridWorld.addStochasticReward(5.0, atGridSquare: GridSquare(x: 2, y: 2), forAction: GridAction.engageClaw, withProbability: 0.2, withCost: -1.0)
-        gridWorld.addStochasticReward(100.0, atGridSquare: GridSquare(x: 0, y: 4), forAction: GridAction.engageClaw, withProbability: 0.01, withCost: -1.0)
-        gridWorld.addStochasticReward(1000.0, atGridSquare: GridSquare(x: 4, y: 0), forAction: GridAction.engageClaw, withProbability: 0.005, withCost: -1.0)
+        gridWorld.addStochasticReward(5.0, atGridSquare: GridSquare(x: 2, y: 2), forAction: GridAction.dig, withProbability: 0.2, withCost: -1.0)
+        gridWorld.addStochasticReward(100.0, atGridSquare: GridSquare(x: 0, y: 4), forAction: GridAction.dig, withProbability: 0.01, withCost: -1.0)
+        gridWorld.addStochasticReward(1000.0, atGridSquare: GridSquare(x: 4, y: 0), forAction: GridAction.dig, withProbability: 0.005, withCost: -1.0)
         
-        let transitions = gridWorld.getTransitions(fromState: GridSquare(x: 2, y: 2), forTakingAction: GridAction.engageClaw)
+        let transitions = gridWorld.getTransitions(fromState: GridSquare(x: 2, y: 2), forTakingAction: GridAction.dig)
         XCTAssertNotNil(transitions)
         
         let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
@@ -99,7 +99,7 @@ class GridWorldSmallTests: XCTestCase {
             actionValueDelegate: { learner.getEstimate(forState: $0, action: $1)},
             epsilon: 0.0)
         
-        playGridWorld(gridWorld: gridWorld, withPolicy: greedyPolicy, currentState: &currentState, score: &score, plays: 100)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: greedyPolicy, currentState: &currentState, score: &score, plays: 100))
        
         if outputPolicy {
             addAttachment(string: createGrid(mdp: gridWorld, policy: greedyPolicy))
@@ -114,11 +114,11 @@ class GridWorldSmallTests: XCTestCase {
 
     func testStochasticRewardWithQLearningDecayingStep() {
         gridWorld.addGoal(at: GridSquare(x: 4, y: 4), withReward: 0.0)
-        gridWorld.addStochasticReward(5.0, atGridSquare: GridSquare(x: 2, y: 2), forAction: GridAction.engageClaw, withProbability: 0.2, withCost: -1.0)
-        gridWorld.addStochasticReward(100.0, atGridSquare: GridSquare(x: 0, y: 4), forAction: GridAction.engageClaw, withProbability: 0.01, withCost: -1.0)
-        gridWorld.addStochasticReward(1000.0, atGridSquare: GridSquare(x: 4, y: 0), forAction: GridAction.engageClaw, withProbability: 0.005, withCost: -1.0)
+        gridWorld.addStochasticReward(5.0, atGridSquare: GridSquare(x: 2, y: 2), forAction: GridAction.dig, withProbability: 0.2, withCost: -1.0)
+        gridWorld.addStochasticReward(100.0, atGridSquare: GridSquare(x: 0, y: 4), forAction: GridAction.dig, withProbability: 0.01, withCost: -1.0)
+        gridWorld.addStochasticReward(1000.0, atGridSquare: GridSquare(x: 4, y: 0), forAction: GridAction.dig, withProbability: 0.005, withCost: -1.0)
         
-        let transitions = gridWorld.getTransitions(fromState: GridSquare(x: 2, y: 2), forTakingAction: GridAction.engageClaw)
+        let transitions = gridWorld.getTransitions(fromState: GridSquare(x: 2, y: 2), forTakingAction: GridAction.dig)
         XCTAssertNotNil(transitions)
         
         let environment = MdpEnvironment(mdp: gridWorld, initialState: GridSquare(x: 0, y: 0))
@@ -139,7 +139,7 @@ class GridWorldSmallTests: XCTestCase {
             actionValueDelegate: { learner.getEstimate(forState: $0, action: $1)},
             epsilon: 0.0)
         
-        playGridWorld(gridWorld: gridWorld, withPolicy: greedyPolicy, currentState: &currentState, score: &score, plays: 100)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: greedyPolicy, currentState: &currentState, score: &score, plays: 100))
         
         if outputPolicy {
             addAttachment(string: createGrid(mdp: gridWorld, policy: greedyPolicy))

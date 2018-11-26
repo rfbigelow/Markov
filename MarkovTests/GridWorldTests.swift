@@ -42,7 +42,7 @@ class GridWorldTests: XCTestCase {
     
     func testNexusPlays() {
         gridWorld.addNexus(from: GridSquare(x: 3, y: 3), to: GridSquare(x: 0, y: 0), withReward: 10.0)
-        playGridWorld(gridWorld: gridWorld, withPolicy: RandomSelectPolicy(mdp: gridWorld), currentState: &currentState, score: &score, plays: 100)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: RandomSelectPolicy(mdp: gridWorld), currentState: &currentState, score: &score, plays: 100))
     }
     
     func testAddVortex() {
@@ -61,7 +61,7 @@ class GridWorldTests: XCTestCase {
     
     func testVortexPlays() {
         gridWorld.addGoal(at: GridSquare(x: 2, y: 2), withReward: -100)
-        playGridWorld(gridWorld: gridWorld, withPolicy: RandomSelectPolicy(mdp: gridWorld), currentState: &currentState, score: &score, plays: 100)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: RandomSelectPolicy(mdp: gridWorld), currentState: &currentState, score: &score, plays: 100))
     }
     
     func testPolicyEvaluatorAndImprover() {
@@ -90,7 +90,7 @@ class GridWorldTests: XCTestCase {
         // Cheat by using DP to get an optimal policy. This will back our Q(s,a) function, since we don't have a learner.
         let optimal = PolicyIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.1, withDiscount: 0.9)
         let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.01, discount: 0.9)
-        policyEvaluator.evaluate(policy: optimal)
+        policyEvaluator.evaluate(policy: optimal.policy)
         
         // Now create our epsilon-greedy policy. It will have perfect knowledge learned from our DP policy evaluator.
         // However, it will sometimes make a "mistake" by going off-policy, according to our epsilon value.
@@ -105,7 +105,7 @@ class GridWorldTests: XCTestCase {
             epsilon: 0.2)
         
         // Make a bunch of moves so we can see how many mistakes were made.
-        playGridWorld(gridWorld: gridWorld, withPolicy: egreedy, currentState: &currentState, score: &score, plays: 100)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: egreedy, currentState: &currentState, score: &score, plays: 100))
         
         // Just make sure it didn't play a perfect game. If it did, then it did not explore at all.
         XCTAssert(score < 0.0, "Epsilon-greedy played a perfect game. That doesn't seem right.")

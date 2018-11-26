@@ -13,14 +13,17 @@ class ValueIterator<TModel: MarkovDecisionProcess> {
     let mdp: TModel
     let gamma: Double
     
+    var iterations: Int = 0
+    
     init(mdp: TModel, gamma: Double) {
+        assert(gamma >= 0.0 && gamma < 1.0)
         self.mdp = mdp
         self.gamma = gamma
     }
     
     /// Outputs an improved policy using value iteration.
     func getPolicy(withTolerance tolerance: Double) -> StochasticPolicy<TModel> {
-        var iterations = 0
+        iterations = 0
         var estimates: Dictionary<TModel.State, Reward> = Dictionary()
         var delta: Double
         let states = mdp.states
@@ -45,13 +48,12 @@ class ValueIterator<TModel: MarkovDecisionProcess> {
             }
             iterations += 1
         } while delta > tolerance
-        print("Converged in \(iterations) iterations.")
         return StochasticPolicy<TModel>(actionMap: chosenActions)
     }
     
     /// Finds an optimal policy by using value iteration.
-    static func getOptimalPolicy(forModel mdp:TModel, withTolerance epsilon: Double, withDiscount gamma: Double) -> StochasticPolicy<TModel> {
+    static func getOptimalPolicy(forModel mdp:TModel, withTolerance epsilon: Double, withDiscount gamma: Double) -> (StochasticPolicy<TModel>, Int) {
         let valueIterator = ValueIterator(mdp: mdp, gamma: gamma)
-        return valueIterator.getPolicy(withTolerance: epsilon)
+        return (valueIterator.getPolicy(withTolerance: epsilon), valueIterator.iterations)
     }
 }

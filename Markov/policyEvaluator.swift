@@ -18,6 +18,7 @@ class PolicyEvaluator<T: MarkovDecisionProcess> {
     var iterations: Int = 0
     
     init(mdp: T, tolerance: Double, discount: Double) {
+        assert(discount < 1.0, "may not converge if not discounted")
         self.mdp = mdp
         self.tolerance = tolerance
         self.discount = discount
@@ -42,6 +43,5 @@ class PolicyEvaluator<T: MarkovDecisionProcess> {
             }
             iterations += 1
         } while maxDelta > tolerance
-        print("Converged in \(iterations) iterations.")
     }
 }

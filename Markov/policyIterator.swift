@@ -43,20 +43,28 @@ class PolicyIterator<TModel: MarkovDecisionProcess> {
         return StochasticPolicy<TModel>(actionMap: chosenActions)
     }
     
-    static func getOptimalPolicy(forModel mdp:TModel, withTolerance epsilon: Double, withDiscount gamma: Double) -> StochasticPolicy<TModel> {
+    static func getOptimalPolicy(forModel mdp:TModel, withTolerance epsilon: Double, withDiscount gamma: Double) -> (policy: StochasticPolicy<TModel>, improvementIterations: Int, evaluatorIterations: Int) {
         let improver = PolicyIterator(mdp: mdp, gamma: gamma)
         let evaluator = PolicyEvaluator(mdp: mdp, tolerance: epsilon, discount: gamma)
         let initialPolicy = RandomSelectPolicy(mdp: mdp)
         
         var priorEstimates = evaluator.estimates
+        var evaluatorIterations = 0
+        var improvementIterations = 0
+        
         evaluator.evaluate(policy: initialPolicy)
+        evaluatorIterations += evaluator.iterations
 
         var policy = improver.improve(policy: initialPolicy, withValueFunction: { evaluator.estimates[$0] ?? 0.0 })
+        improvementIterations += 1
+        
         while !priorEstimates.elementsEqual(evaluator.estimates, by: { $0 == $1 }) {
             priorEstimates = evaluator.estimates
             evaluator.evaluate(policy: policy)
+            evaluatorIterations += evaluator.iterations
             policy = improver.improve(policy: policy, withValueFunction: { evaluator.estimates[$0] ?? 0.0 })
+            improvementIterations += 1
         }
-        return policy
+        return (policy, improvementIterations, evaluatorIterations)
     }
 }

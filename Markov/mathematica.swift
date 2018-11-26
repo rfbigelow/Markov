@@ -19,8 +19,8 @@ func createGrid<TModel: GridWorld, TPolicy: Policy>(mdp: TModel, policy: TPolicy
                 cell += ", left"
             case GridAction.right:
                 cell += ", right"
-            case GridAction.engageClaw:
-                cell += ", engageClaw"
+            case GridAction.dig:
+                cell += ", dig"
             }
         }
         cell += "}, PlotRange -> {{-1, 1}, {-1, 1}}, ImagePadding -> 10]"

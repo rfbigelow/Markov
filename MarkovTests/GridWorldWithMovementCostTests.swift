@@ -29,23 +29,23 @@ class GridWorldWithMovementCostTests: XCTestCase {
     
     func testPolicyIteration() {
         let optimal = PolicyIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.99)
-        playGridWorld(gridWorld: gridWorld, withPolicy: optimal, currentState: &currentState, score: &score, plays: 100)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: optimal.policy, currentState: &currentState, score: &score, plays: 100))
         XCTAssert(score == -47.0)
         
         if outputPolicy {
-            addAttachment(string: createGrid(mdp: gridWorld, policy: optimal))
+            addAttachment(string: createGrid(mdp: gridWorld, policy: optimal.policy))
         }
         
         if outputStateValues {
             let policyEvaluator = PolicyEvaluator(mdp: gridWorld, tolerance: 0.001, discount: 0.99)
-            policyEvaluator.evaluate(policy: optimal)
+            policyEvaluator.evaluate(policy: optimal.policy)
             addAttachment(string: createGrid(mdp: gridWorld, withValueFunction: { (s: GridWorld.State) -> Reward in policyEvaluator.estimates[s] ?? 0.0}, format: "%.2f"))
         }
     }
     
     func testValueIteration() {
-        let optimal = ValueIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.90)
-        playGridWorld(gridWorld: gridWorld, withPolicy: optimal, currentState: &currentState, score: &score, plays: 100)
+        let (optimal, _) = ValueIterator.getOptimalPolicy(forModel: gridWorld, withTolerance: 0.001, withDiscount: 0.90)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: optimal, currentState: &currentState, score: &score, plays: 100))
         XCTAssert(score == -47.0)
         
         if outputPolicy {
@@ -78,7 +78,7 @@ class GridWorldWithMovementCostTests: XCTestCase {
             actionsForStateDelegate: { environment.getActions(forState: $0) },
             actionValueDelegate: { learner.getEstimate(forState: $0, action: $1) },
             epsilon: 0.0)
-        playGridWorld(gridWorld: gridWorld, withPolicy: greedy, currentState: &currentState, score: &score, plays: 100)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: greedy, currentState: &currentState, score: &score, plays: 100))
         XCTAssert(currentState == GridSquare(x: 24, y: 24))
 
         if outputPolicy {
@@ -110,7 +110,7 @@ class GridWorldWithMovementCostTests: XCTestCase {
             actionsForStateDelegate: { environment.getActions(forState: $0) },
             actionValueDelegate: { learner.getEstimate(forState: $0, action: $1) },
             epsilon: 0.0)
-        playGridWorld(gridWorld: gridWorld, withPolicy: greedy, currentState: &currentState, score: &score, plays: 100)
+        addAttachment(string: playGridWorld(gridWorld: gridWorld, withPolicy: greedy, currentState: &currentState, score: &score, plays: 100))
         XCTAssert(currentState == GridSquare(x: 24, y: 24))
         
         if outputPolicy {

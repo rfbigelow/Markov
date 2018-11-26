@@ -11,7 +11,7 @@ struct GridSquare: Equatable, Hashable {
     let y: Int
 }
 
-enum GridAction { case up, down, left, right, engageClaw }
+enum GridAction { case up, down, left, right, dig }
 
 class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
     typealias Action = GridAction
@@ -105,27 +105,29 @@ class GridWorld: TableDrivenMDP<GridAction, GridSquare> {
             else {
                 transition = Transition(state: GridSquare(x: gs.x + 1, y: gs.y), reward: movementCost)
             }
-        case GridAction.engageClaw:
+        case GridAction.dig:
             return nil
         }
         return WeightedDistribution(weightedEvents: [(transition, 1.0)])
     }
 }
 
-func playGridWorld<T: Policy>(gridWorld: GridWorld, withPolicy policy: T, currentState: inout GridSquare, score: inout Double, plays: Int)
+func playGridWorld<T: Policy>(gridWorld: GridWorld, withPolicy policy: T, currentState: inout GridSquare, score: inout Double, plays: Int) -> String
     where T.Action == GridWorld.Action, T.State == GridWorld.State {
-        print(currentState, score)
+        var output = ""
+        output += "\(currentState), \(score)\n"
         for _ in 0..<plays {
             if let action = policy.getAction(forState: currentState) {
                 var reward = 0.0
                 (currentState, reward) = gridWorld.transition(fromState: currentState, byTakingAction: action)
                 score += reward
-                print(action, reward)
-                print(currentState, score)
+                output += "\(action), \(reward)\n"
+                output += "\(currentState), \(score)\n"
             }
             else {
                 break
             }
         }
-        print(score)
+        output += "\(score)"
+        return output
 }
